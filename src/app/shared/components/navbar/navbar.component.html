@@ -1,0 +1,53 @@
+<div class="uk-card uk-card-body uk-card-default uk-padding-remove" uk-scrollspy="cls: animation-slide-left">
+  <nav uk-navbar="" class="uk-navbar">
+    <div class="uk-navbar-left uk-visible@m">
+
+      <ul class="uk-navbar-nav">
+
+        <li *ngFor="let navbarItem of navbarRoutes" routerLinkActive="uk-active">
+          <a [routerLink]="navbarItem.route">{{ navbarItem.name }}</a>
+        </li>
+      </ul>
+
+    </div>
+
+    <div class="uk-navbar-left uk-hidden@m" style="display: flex; align-items: center;">
+      <p style="font-size: 1.5rem; margin: 0 0 0 10px;">Logo</p>
+    </div>
+
+    <div class="uk-navbar-right uk-hidden@m">
+
+      <a class="uk-navbar-toggle uk-icon uk-navbar-toggle-icon" href="#offcanvas" uk-navbar-toggle-icon="" uk-toggle="">
+        <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+          data-svg="navbar-toggle-icon">
+          <rect y="9" width="20" height="2"></rect>
+          <rect y="3" width="20" height="2"></rect>
+          <rect y="15" width="20" height="2"></rect>
+        </svg>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<div id="offcanvas" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar">
+
+    <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+    <div class="uk-margin-bottom">
+      <p style="font-size: 3rem;">Logo</p>
+    </div>
+
+    <ul class="uk-nav uk-nav-primary uk-iconnav uk-iconnav-vertical">
+      <li *ngFor="let navbarItem of navbarRoutes">
+        <div class="uk-flex">
+          <a class="list-mobile" [routerLink]="navbarItem.route" routerLinkActive="active-item" (click)="closeMenu()"
+            style="position: relative; font-size: 1.5rem;">
+            <i [class]="navbarItem.icon" style="position: absolute;top: 2px;"></i>
+            <span style="margin-left: 35px;">{{ navbarItem.name | titlecase }}</span>
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

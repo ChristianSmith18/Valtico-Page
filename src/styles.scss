@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import './assets/scss/variables.scss';
+
+* {
+  font-family: 'Font Awesome 5', sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom, #f8f8f8, #fff);
+}

@@ -1,0 +1,43 @@
+@import '../../../../assets/scss/variables.scss';
+
+.social-bar-container {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+
+  ul {
+    margin: 0;
+    padding: 0;
+    border-radius: 10px 0 0 10px;
+
+    li {
+      font-size: 1.4rem;
+      list-style: none;
+      text-align: center;
+      padding: 6px 8px;
+      background-color: rgba($color-primary-base, 85%);
+      margin-bottom: 5px;
+      cursor: pointer;
+      transition: background-color ease-in-out .2s;
+
+      &:first-child {
+        border-radius: 10px 0 0 0;
+      }
+
+      &:last-child {
+        margin: 0;
+        border-radius: 0 0 0 10px;
+      }
+
+      &:hover {
+        background-color: $color-secondary-tint;
+      }
+
+      a {
+        color: $color-primary-contrast;
+      }
+    }
+  }
+}
