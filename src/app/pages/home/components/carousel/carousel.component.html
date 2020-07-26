@@ -1,13 +1,15 @@
 <div id="slideshow" class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1"
-  [attr.uk-slideshow]="'animation: fade; max-height: ' + maxHeight">
+  [attr.uk-slideshow]="getOptions">
 
   <ul class="uk-slideshow-items">
     <li *ngFor="let slide of slides">
-      <img [src]="slide.img" alt="" uk-cover>
-      <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
-        <h3 class="uk-margin-remove">{{ slide.title }}</h3>
-        <p class="uk-margin-remove">{{ slide.description }}</p>
-      </div>
+      <a [routerLink]="slide.route">
+        <img [src]="slide.img" alt="" uk-cover>
+        <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+          <h3 class="uk-margin-remove">{{ slide.title }}</h3>
+          <p class="uk-margin-remove">{{ slide.description }}</p>
+        </div>
+      </a>
     </li>
   </ul>
 

@@ -1,24 +1,30 @@
 <div class="uk-text-center uk-grid-match" uk-grid>
   <div class="uk-width-1-1@m">
-    <div uk-grid>
+    <div class="uk-grid-match" uk-grid>
       <div class="uk-width-expand">
-        <app-carousel [carouselControllers]="true" [maxHeight]="320"></app-carousel>
+        <app-carousel [carouselControllers]="false" [options]="options"></app-carousel>
       </div>
-      <div class="uk-width-1-3">
-        <div class="uk-card uk-card-default uk-card-body carousel-box" style="background-color: #8bcdcd;">
-          <ul>
-            <li (click)="setIndex(0)" style="cursor: pointer;">0</li>
-            <li (click)="setIndex(1)" style="cursor: pointer;">1</li>
-            <li (click)="setIndex(2)" style="cursor: pointer;">2</li>
+      <div class="uk-width-1-3 uk-visible@m">
+        <div class="uk-card uk-card-default uk-card-body carousel-box uk-padding-remove"
+          style="background-color: #8bcdcd;">
+          <ul class="uk-padding-remove">
+            <li *ngFor="let slide of slides; let i = index; let total = count"
+              [ngClass]="{'index-active': i === indexSlideActive}" [style.height]="setHeight(total)"
+              (click)="setIndex(i)">
+              <div class="bg-text">
+                <h3 class="uk-margin-remove">{{ slide.title }}</h3>
+                <p class="uk-margin-remove">{{ slide.description }}</p>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
   <div class="uk-width-1-2@m">
-    <div class="uk-card uk-card-default uk-card-body boxes" style="background-color: #f1c5c5;">Productos</div>
+    <div routerLink="/products" class="uk-card uk-card-default uk-card-body boxes" style="background-color: #f1c5c5;">Productos</div>
   </div>
   <div class="uk-width-1-2@m">
-    <div class="uk-card uk-card-default uk-card-body boxes" style="background-color: #faf0af;">Servicios</div>
+    <div routerLink="/services" class="uk-card uk-card-default uk-card-body boxes" style="background-color: #faf0af;">Servicios</div>
   </div>
 </div>

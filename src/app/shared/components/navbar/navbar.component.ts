@@ -15,6 +15,7 @@ interface NavbarRoutes {
 export class NavbarComponent implements OnInit {
   public navbarRoutes: NavbarRoutes[] = [
     { name: 'home', route: 'home', icon: 'fas fa-home' },
+    { name: 'servicios', route: 'services', icon: 'fas fa-receipt' },
     { name: 'productos', route: 'products', icon: 'fas fa-store' },
     { name: 'quiénes somos', route: 'about', icon: 'fas fa-question-circle' },
     { name: 'clientes', route: 'clients', icon: 'fas fa-users' },

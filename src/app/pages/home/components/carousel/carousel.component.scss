@@ -1,0 +1,9 @@
+#slideshow>ul {
+  transition: min-height ease-in-out .4s;
+}
+
+@media screen and (max-width: 620px) {
+  #slideshow>ul {
+    min-height: 450px !important;
+  }
+}

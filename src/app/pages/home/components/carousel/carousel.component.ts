@@ -1,12 +1,5 @@
 import { Component, Input } from '@angular/core';
-
-interface SlideItem {
-  title: string;
-  description: string;
-  route: string;
-  img: string;
-}
-
+import { CarouselService, SlideItem } from '../../services/carousel.service';
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
@@ -14,28 +7,22 @@ interface SlideItem {
 })
 export class CarouselComponent {
   @Input() carouselControllers = true;
-  @Input() maxHeight = 320;
+  @Input() options = {
+    animation: 'fade',
+    'max-height': 320,
+  };
+  public slides: SlideItem[];
 
-  public slides: SlideItem[] = [
-    {
-      title: 'First',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      route: 'products',
-      img: 'https://getuikit.com/docs/images/photo.jpg',
-    },
-    {
-      title: 'Second',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      route: 'products',
-      img: 'https://getuikit.com/docs/images/dark.jpg',
-    },
-    {
-      title: 'Third',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      route: 'products',
-      img: 'https://getuikit.com/docs/images/light.jpg',
-    },
-  ];
+  constructor(private _carousel: CarouselService) {
+    this.slides = this._carousel.getSlides;
+  }
 
-  constructor() {}
+  get getOptions() {
+    let options = '';
+    // tslint:disable-next-line: forin
+    for (const key in this.options) {
+      options += `${key}: ${this.options[`${key}`]}; `;
+    }
+    return options;
+  }
 }

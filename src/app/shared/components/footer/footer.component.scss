@@ -1,0 +1,36 @@
+.dev-section,
+span.author,
+span.framework,
+span.powered {
+  font-family: 'Lobster Two', cursive;
+}
+
+.dev-section {
+  font-size: 1.1rem;
+  margin-bottom: -30px;
+
+  span.author,
+  span.framework {
+    cursor: pointer;
+    transition: all ease-in-out .3s;
+  }
+
+  span.author:hover {
+    color: #56959E;
+    font-size: 1.2rem;
+  }
+
+  span.framework:hover {
+    color: #DD1B16;
+  }
+}
+
+@media (max-width: 440px) {
+  span.powered {
+    display: none;
+  }
+
+  .dev-section {
+    margin-bottom: 0px;
+  }
+}

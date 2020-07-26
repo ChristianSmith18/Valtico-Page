@@ -9,8 +9,9 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { BlogComponent } from './blog/blog.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { CarouselComponent } from './home/components/carousel/carousel.component';
+import { RouterModule } from '@angular/router';
 
-const components = [
+const globalComponents = [
   HomeComponent,
   ProductosComponent,
   ServiciosComponent,
@@ -21,8 +22,8 @@ const components = [
 ];
 
 @NgModule({
-  declarations: [...components, CarouselComponent],
-  imports: [CommonModule],
-  exports: [...components],
+  declarations: [...globalComponents, CarouselComponent],
+  imports: [CommonModule, RouterModule],
+  exports: [...globalComponents],
 })
 export class PagesModule {}
