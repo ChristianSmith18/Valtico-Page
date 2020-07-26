@@ -8,6 +8,7 @@ import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { BlogComponent } from './blog/blog.component';
 import { EventosComponent } from './eventos/eventos.component';
+import { CarouselComponent } from './home/components/carousel/carousel.component';
 
 const components = [
   HomeComponent,
@@ -20,7 +21,7 @@ const components = [
 ];
 
 @NgModule({
-  declarations: [...components],
+  declarations: [...components, CarouselComponent],
   imports: [CommonModule],
   exports: [...components],
 })

@@ -1,0 +1,20 @@
+<div id="slideshow" class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1"
+  [attr.uk-slideshow]="'animation: fade; max-height: ' + maxHeight">
+
+  <ul class="uk-slideshow-items">
+    <li *ngFor="let slide of slides">
+      <img [src]="slide.img" alt="" uk-cover>
+      <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+        <h3 class="uk-margin-remove">{{ slide.title }}</h3>
+        <p class="uk-margin-remove">{{ slide.description }}</p>
+      </div>
+    </li>
+  </ul>
+
+  <ng-container *ngIf="carouselControllers">
+    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
+      uk-slideshow-item="previous"></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+      uk-slideshow-item="next"></a>
+  </ng-container>
+</div>
