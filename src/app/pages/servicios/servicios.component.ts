@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./servicios.component.scss'],
 })
 export class ServiciosComponent implements OnInit {
+  public services = new Array(5);
   constructor() {}
 
   ngOnInit(): void {}

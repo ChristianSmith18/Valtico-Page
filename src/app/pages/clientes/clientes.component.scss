@@ -1,0 +1,17 @@
+a.uk-accordion-title {
+  transition: content ease-in-out .4s;
+
+  &::before {
+    font-family: FontAwesome;
+    content: '\f105';
+    background-image: none !important;
+  }
+}
+
+.uk-open {
+  a.uk-accordion-title::before {
+    font-family: FontAwesome;
+    content: '\f107';
+    background-image: none !important;
+  }
+}

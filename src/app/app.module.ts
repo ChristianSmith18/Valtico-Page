@@ -4,17 +4,18 @@ import { NgModule } from '@angular/core';
 // Modules
 import { AppRoutingModule } from './app-routing.module';
 import { PagesModule } from './pages/pages.module';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 // Components
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './shared/components/navbar/navbar.component';
-import { SocialBarComponent } from './shared/components/social-bar/social-bar.component';
-import { FooterComponent } from './shared/components/footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, SocialBarComponent, FooterComponent],
-  imports: [BrowserModule, AppRoutingModule, PagesModule],
+  declarations: [
+    AppComponent,
+  ],
+  imports: [BrowserModule, AppRoutingModule, PagesModule, AuthenticationModule],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [],
 })
 export class AppModule {}

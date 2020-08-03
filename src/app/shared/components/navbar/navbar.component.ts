@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import UIkit from 'uikit';
 
-interface NavbarRoutes {
+export interface NavbarRoutes {
   name: string;
   route: string;
-  icon: string;
+  icon?: string;
+  child?: NavbarRoutes[];
 }
 
 @Component({
@@ -15,10 +16,15 @@ interface NavbarRoutes {
 export class NavbarComponent implements OnInit {
   public navbarRoutes: NavbarRoutes[] = [
     { name: 'home', route: 'home', icon: 'fas fa-home' },
-    { name: 'servicios', route: 'services', icon: 'fas fa-receipt' },
     { name: 'productos', route: 'products', icon: 'fas fa-store' },
+    { name: 'servicios', route: 'services', icon: 'fas fa-receipt' },
     { name: 'quiénes somos', route: 'about', icon: 'fas fa-question-circle' },
-    { name: 'clientes', route: 'clients', icon: 'fas fa-users' },
+    {
+      name: 'clientes',
+      route: 'clients',
+      icon: 'fas fa-users',
+      child: [{ name: 'Casos de Exito', route: 'success' }],
+    },
     { name: 'blog', route: 'blog', icon: 'fas fa-blog' },
     { name: 'eventos', route: 'events', icon: 'fas fa-calendar-week' },
   ];

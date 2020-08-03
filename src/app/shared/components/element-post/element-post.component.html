@@ -1,0 +1,26 @@
+<div class="uk-card uk-card-default">
+  <div class="uk-card-media-top uk-text-center" [routerLink]="route">
+    <img [src]="frontImg" alt="">
+  </div>
+  <div class="uk-card-body uk-padding-small">
+    <article class="uk-article" style="padding-bottom: 28px;">
+      <p class="uk-article-meta">
+        Escrito el {{ date }}.
+        <br>
+        Posteado en <a href="#">{{ tag }}</a>
+      </p>
+
+      <h1 class="uk-comment-title uk-margin-remove-top">{{ title }}</h1>
+
+
+      <p>{{ text }}</p>
+
+      <div class="uk-grid-small uk-child-width-auto" uk-grid>
+        <div>
+          <a class="uk-button uk-button-text" [routerLink]="route">Continuar Leyendo</a>
+        </div>
+      </div>
+
+    </article>
+  </div>
+</div>

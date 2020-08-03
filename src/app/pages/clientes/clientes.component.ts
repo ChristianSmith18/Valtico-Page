@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./clientes.component.scss'],
 })
 export class ClientesComponent implements OnInit {
+  public clients = new Array(5);
   constructor() {}
 
   ngOnInit(): void {}

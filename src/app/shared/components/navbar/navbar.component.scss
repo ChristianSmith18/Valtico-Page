@@ -26,6 +26,10 @@ nav {
       min-height: unset;
     }
   }
+
+  .uk-drop {
+    width: 210px;
+  }
 }
 
 .uk-offcanvas-bar {
@@ -57,4 +61,12 @@ nav {
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
   }
+}
+
+.uk-navbar-dropdown-bottom {
+  margin-top: 5px;
+}
+
+.uk-navbar-dropdown {
+  padding: 5px 25px;
 }

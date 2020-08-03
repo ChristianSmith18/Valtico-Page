@@ -1,0 +1,18 @@
+<div class="uk-card uk-card-default">
+  <div *ngIf="getType" class="card-title-container">
+    <h3 class="uk-card-title">{{ title }}</h3>
+  </div>
+
+  <div class="uk-card-media-top uk-inline-clip uk-transition-toggle" tabindex="0">
+    <a href="#modal-full" uk-toggle>
+      <img [src]="imgStatic" alt="">
+      <img class="uk-transition-scale-up uk-position-cover" [src]="imgHover" alt="">
+      <div *ngIf="!getType" class="uk-overlay uk-overlay-primary uk-position-bottom uk-padding-small">
+        <h3 class="uk-margin-remove">{{ title }}</h3>
+      </div>
+    </a>
+  </div>
+  <div *ngIf="getType" class="uk-card-body">
+    <p>{{ description }}</p>
+  </div>
+</div>

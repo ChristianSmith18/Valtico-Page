@@ -1,0 +1,56 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a routerLink="valtico-admin" class="brand-link">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Nintendo_Switch_logo%2C_square.png"
+      alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <span class="brand-text font-weight-light">Valtico Chile</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+        <li class="nav-item has-treeview menu-open">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Secciones del Sitio
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <ng-container *ngFor="let page of pages">
+              <li class="nav-item">
+                <a href="#" class="nav-link" [routerLink]="page.route" routerLinkActive="active">
+                  <i [class]="page.icon+' nav-icon'"></i>
+                  <p>{{ page.name | titlecase }}</p>
+                </a>
+              </li>
+              <ng-container *ngIf="page.child">
+                <li *ngFor="let child of page.child" class="nav-item">
+                  <a href="#" class="nav-link" [routerLink]="child.route" routerLinkActive="active">
+                    <i [class]="child.icon+' nav-icon'"></i>
+                    <p>{{ child.name | titlecase }}</p>
+                  </a>
+                </li>
+              </ng-container>
+            </ng-container>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link bg-danger">
+            <i class="fas fa-sign-out-alt nav-icon"></i>
+            <p>Cerrar Sesión</p>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

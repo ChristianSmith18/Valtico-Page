@@ -1,3 +1,7 @@
+<div class="uk-visible@m">
+  <p style="font-size: 2.8rem; margin: 0 0 0 10px;">Logo</p>
+</div>
+
 <div class="uk-card uk-card-body uk-card-default uk-padding-remove" uk-scrollspy="cls: animation-slide-left">
   <nav uk-navbar="" class="uk-navbar">
     <div class="uk-navbar-left uk-visible@m">
@@ -6,6 +10,13 @@
 
         <li *ngFor="let navbarItem of navbarRoutes" routerLinkActive="uk-active">
           <a [routerLink]="navbarItem.route">{{ navbarItem.name }}</a>
+          <div *ngIf="navbarItem.child" class="uk-navbar-dropdown">
+            <ul class="uk-nav uk-navbar-dropdown-nav">
+              <li *ngFor="let navbarItemChild of navbarItem.child" routerLinkActive="uk-active">
+                <a [routerLink]="navbarItemChild.route">{{ navbarItemChild.name }}</a>
+              </li>
+            </ul>
+          </div>
         </li>
       </ul>
 
@@ -25,6 +36,19 @@
           <rect y="15" width="20" height="2"></rect>
         </svg>
       </a>
+    </div>
+
+    <div class="uk-navbar-right uk-visible@m">
+
+      <div>
+        <a class="uk-navbar-toggle" uk-search-icon href="#"></a>
+        <div class="uk-drop" uk-drop="mode: click; pos: left-center; offset: 0">
+          <form class="uk-search uk-search-navbar uk-width-1-1">
+            <input class="uk-search-input" type="search" placeholder="Buscar..." autofocus>
+          </form>
+        </div>
+      </div>
+
     </div>
   </nav>
 </div>
@@ -47,6 +71,15 @@
             <span style="margin-left: 35px;">{{ navbarItem.name | titlecase }}</span>
           </a>
         </div>
+        <!-- Para las rutas hijas -->
+        <ng-container *ngIf="navbarItem.child">
+          <div *ngFor="let child of navbarItem.child" class="uk-flex">
+            <a class="list-mobile" [routerLink]="child.route" routerLinkActive="active-item" (click)="closeMenu()"
+              style="position: relative; font-size: 1.5rem;">
+              <span style="margin-left: 50px;">{{ child.name | titlecase }}</span>
+            </a>
+          </div>
+        </ng-container>
       </li>
     </ul>
   </div>
