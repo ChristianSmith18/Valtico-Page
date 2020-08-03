@@ -1,5 +1,6 @@
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -10,12 +11,16 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    PagesModule,
+    AuthenticationModule,
+    BrowserAnimationsModule,
   ],
-  imports: [BrowserModule, AppRoutingModule, PagesModule, AuthenticationModule],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

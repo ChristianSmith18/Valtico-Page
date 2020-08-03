@@ -33,7 +33,7 @@
               </li>
               <ng-container *ngIf="page.child">
                 <li *ngFor="let child of page.child" class="nav-item">
-                  <a href="#" class="nav-link" [routerLink]="child.route" routerLinkActive="active">
+                  <a class="nav-link" [routerLink]="child.route" routerLinkActive="active">
                     <i [class]="child.icon+' nav-icon'"></i>
                     <p>{{ child.name | titlecase }}</p>
                   </a>
@@ -43,7 +43,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link bg-danger">
+          <a class="nav-link bg-danger" (click)="signOut()">
             <i class="fas fa-sign-out-alt nav-icon"></i>
             <p>Cerrar Sesión</p>
           </a>

@@ -1,11 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { AuthenticationService } from './services/authentication.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
 })
-export class AuthenticationComponent implements OnInit {
-  constructor() {}
+export class AuthenticationComponent implements OnDestroy {
+  private authSubscription: Subscription;
 
-  ngOnInit(): void {}
+  constructor(private _authentication: AuthenticationService) {
+    this.authSubscription = this._authentication
+      .authState()
+      .subscribe(console.log);
+  }
+
+  ngOnDestroy(): void {
+    this.authSubscription.unsubscribe();
+  }
 }

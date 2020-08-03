@@ -22,7 +22,7 @@ export class BreadcrumbComponent implements OnDestroy {
     private titleCase: TitleCasePipe
   ) {
     this.titleSubscription = this.getRouteData().subscribe(({ title }) => {
-      this.titleDoc.setTitle(`AdminPro - ${this.titleCase.transform(title)}`);
+      this.titleDoc.setTitle(`Dashboard - ${this.titleCase.transform(title)}`);
       this.title = title;
     });
   }
