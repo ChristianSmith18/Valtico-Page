@@ -39,6 +39,11 @@ export class SidebarComponent implements OnInit {
     this._swal.confirmSwal().then((result) => {
       if (result.value) {
         this._authentication.signOut().then(() => {
+          this._swal.mixinSwal(
+            'Se ha cerrado sesión correctamente!',
+            'success',
+            1500
+          );
           this.router.navigate(['valtico-admin/login']);
         });
       }

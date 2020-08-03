@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import './assets/scss/variables.scss';
+@import './node_modules/@sweetalert2/theme-bootstrap-4/bootstrap-4.scss';
 
 * {
   font-family: 'Font Awesome 5', sans-serif;
