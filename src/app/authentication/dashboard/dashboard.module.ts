@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+// Modules
 import { DashboardRoutingModule } from './dashboard.routing';
 
+// Pages Components
+import { DashboardComponent } from './dashboard.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductosComponent } from './pages/productos/productos.component';
@@ -11,7 +15,6 @@ import { ClientesComponent } from './pages/clientes/clientes.component';
 import { CasosDeExitoComponent } from './pages/casos-de-exito/casos-de-exito.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { EventosComponent } from './pages/eventos/eventos.component';
-import { DashboardComponent } from './dashboard.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 

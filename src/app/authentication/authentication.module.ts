@@ -2,8 +2,11 @@ import { NgModule } from '@angular/core';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
+// Modules
 import { AuthenticationRoutingModule } from './authentication.routing';
 
+// Components
 import { LoginComponent } from './login/login.component';
 import { AuthenticationComponent } from './authentication.component';
 
