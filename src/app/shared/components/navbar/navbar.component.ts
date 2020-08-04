@@ -4,7 +4,7 @@ import UIkit from 'uikit';
 export interface NavbarRoutes {
   name: string;
   route: string;
-  icon?: string;
+  icon: string;
   child?: NavbarRoutes[];
 }
 
@@ -23,7 +23,9 @@ export class NavbarComponent implements OnInit {
       name: 'clientes',
       route: 'clients',
       icon: 'fas fa-users',
-      child: [{ name: 'Casos de Exito', route: 'success' }],
+      child: [
+        { name: 'casos de éxito', route: 'success', icon: 'fas fa-thumbs-up' },
+      ],
     },
     { name: 'blog', route: 'blog', icon: 'fas fa-blog' },
     { name: 'eventos', route: 'events', icon: 'fas fa-calendar-week' },

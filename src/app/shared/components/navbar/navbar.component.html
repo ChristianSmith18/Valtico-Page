@@ -62,25 +62,23 @@
       <p style="font-size: 3rem;">Logo</p>
     </div>
 
-    <ul class="uk-nav uk-nav-primary uk-iconnav uk-iconnav-vertical">
-      <li *ngFor="let navbarItem of navbarRoutes">
-        <div class="uk-flex">
-          <a class="list-mobile" [routerLink]="navbarItem.route" routerLinkActive="active-item" (click)="closeMenu()"
-            style="position: relative; font-size: 1.5rem;">
-            <i [class]="navbarItem.icon" style="position: absolute;top: 2px;"></i>
-            <span style="margin-left: 35px;">{{ navbarItem.name | titlecase }}</span>
+    <ul class="nav nav-pills nav-sidebar flex-column">
+      <ng-container *ngFor="let navbarItem of navbarRoutes">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="navbarItem.route" routerLinkActive="active" (click)="closeMenu()">
+            <i [class]="navbarItem.icon+' nav-icon'"></i>
+            <p>{{ navbarItem.name | titlecase }}</p>
           </a>
-        </div>
-        <!-- Para las rutas hijas -->
+        </li>
         <ng-container *ngIf="navbarItem.child">
-          <div *ngFor="let child of navbarItem.child" class="uk-flex">
-            <a class="list-mobile" [routerLink]="child.route" routerLinkActive="active-item" (click)="closeMenu()"
-              style="position: relative; font-size: 1.5rem;">
-              <span style="margin-left: 50px;">{{ child.name | titlecase }}</span>
+          <li *ngFor="let child of navbarItem.child" class="nav-item">
+            <a class="nav-link" [routerLink]="child.route" routerLinkActive="active" (click)="closeMenu()">
+              <i [class]="child.icon+' nav-icon'"></i>
+              <p>{{ child.name | titlecase }}</p>
             </a>
-          </div>
+          </li>
         </ng-container>
-      </li>
+      </ng-container>
     </ul>
   </div>
 </div>

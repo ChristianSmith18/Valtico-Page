@@ -5,6 +5,10 @@ footer.uk-section {
   h3 {
     color: #fff;
   }
+
+  p {
+    color: rgba(#fff, .5);
+  }
 }
 
 .dev-section,
@@ -17,6 +21,7 @@ span.powered {
 .dev-section {
   font-size: 1.1rem;
   margin-bottom: -30px;
+  color: rgba(#fff, .6);
 
   span.author,
   span.framework {
@@ -40,6 +45,6 @@ span.powered {
   }
 
   .dev-section {
-    margin-bottom: 0px;
+    margin-bottom: -26px;
   }
 }
