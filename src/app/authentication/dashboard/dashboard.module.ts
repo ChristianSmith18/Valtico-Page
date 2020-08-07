@@ -17,6 +17,7 @@ import { BlogComponent } from './pages/blog/blog.component';
 import { EventosComponent } from './pages/eventos/eventos.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { QuillEditorComponent } from './components/quill-editor/quill-editor.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     EventosComponent,
     NavbarComponent,
     BreadcrumbComponent,
+    QuillEditorComponent,
   ],
   imports: [CommonModule, DashboardRoutingModule],
 })

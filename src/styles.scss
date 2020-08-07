@@ -49,6 +49,33 @@ body {
   stroke: #ccc;
 }
 
+.ql-picker-options {
+  .ql-stroke {
+    stroke: #444 !important;
+  }
+}
+
 .ql-snow .ql-fill {
   fill: #ccc;
+}
+
+.fix-formats-2 {
+  margin-top: -2px;
+}
+
+.fix-formats-4 {
+  margin-top: -4px;
+}
+
+#editor {
+  height: 350px;
+}
+
+em {
+  color: unset;
+}
+
+[data-mode="formula"] {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
 }
