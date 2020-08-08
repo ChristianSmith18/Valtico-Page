@@ -33,7 +33,13 @@ export class SidebarComponent implements OnInit {
     private _swal: SwalService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    document
+      .querySelector('#options-menu > a')
+      .addEventListener('click', () => {
+        document.getElementById('options-menu').classList.toggle('menu-open');
+      });
+  }
 
   signOut() {
     this._swal.confirmSwal().then((result) => {

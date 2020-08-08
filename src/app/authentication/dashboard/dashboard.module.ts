@@ -1,3 +1,4 @@
+import { SharedModule } from '@shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -18,6 +19,7 @@ import { EventosComponent } from './pages/eventos/eventos.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { QuillEditorComponent } from './components/quill-editor/quill-editor.component';
+import { FabButtonComponent } from './components/fab-button/fab-button.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { QuillEditorComponent } from './components/quill-editor/quill-editor.com
     NavbarComponent,
     BreadcrumbComponent,
     QuillEditorComponent,
+    FabButtonComponent,
   ],
-  imports: [CommonModule, DashboardRoutingModule],
+  imports: [CommonModule, DashboardRoutingModule, SharedModule],
 })
 export class DashboardModule {}

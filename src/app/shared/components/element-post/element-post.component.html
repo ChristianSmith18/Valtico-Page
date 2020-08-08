@@ -1,26 +1,44 @@
 <div class="uk-card uk-card-default">
+  <a
+    *ngIf="isAdmin"
+    class="uk-icon-button"
+    uk-icon="more-vertical"
+    type="button"
+  ></a>
+  <div uk-dropdown="mode: click; delay-hide: 100; animation: uk-animation-scale-up; pos: bottom-right">
+    <ul class="uk-nav uk-dropdown-nav">
+      <li class="uk-active"><a href="#">Active</a></li>
+      <li><a href="#">Item</a></li>
+      <li class="uk-nav-header">Header</li>
+      <li><a href="#">Item</a></li>
+      <li><a href="#">Item</a></li>
+      <li class="uk-nav-divider"></li>
+      <li><a href="#">Item</a></li>
+    </ul>
+  </div>
+
   <div class="uk-card-media-top uk-text-center" [routerLink]="route">
-    <img [src]="frontImg" alt="">
+    <img [src]="frontImg" alt="" style="width: 100%;" />
   </div>
   <div class="uk-card-body uk-padding-small">
     <article class="uk-article" style="padding-bottom: 28px;">
       <p class="uk-article-meta">
         Escrito el {{ date }}.
-        <br>
+        <br />
         Posteado en <a href="#">{{ tag }}</a>
       </p>
 
       <h1 class="uk-comment-title uk-margin-remove-top">{{ title }}</h1>
 
-
       <p>{{ text }}</p>
 
       <div class="uk-grid-small uk-child-width-auto" uk-grid>
         <div>
-          <a class="uk-button uk-button-text" [routerLink]="route">Continuar Leyendo</a>
+          <a class="uk-button uk-button-text" [routerLink]="route"
+            >Continuar Leyendo</a
+          >
         </div>
       </div>
-
     </article>
   </div>
 </div>

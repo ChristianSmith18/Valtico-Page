@@ -14,6 +14,7 @@ export class ElementPostComponent implements OnInit {
     'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic accusantium corrupti ipsa blanditiis, pariatur consequuntur ut delectus corporis, ratione non debitis voluptates totam minus nesciunt officia.';
   @Input() date = '27 de Julio del 2020';
   @Input() route = '';
+  @Input() isAdmin = false;
 
   constructor() {}
 
