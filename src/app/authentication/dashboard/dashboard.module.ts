@@ -1,5 +1,6 @@
 import { SharedModule } from '@shared/shared.module';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 // Modules
@@ -38,6 +39,6 @@ import { FabButtonComponent } from './components/fab-button/fab-button.component
     QuillEditorComponent,
     FabButtonComponent,
   ],
-  imports: [CommonModule, DashboardRoutingModule, SharedModule],
+  imports: [CommonModule, FormsModule, DashboardRoutingModule, SharedModule],
 })
 export class DashboardModule {}

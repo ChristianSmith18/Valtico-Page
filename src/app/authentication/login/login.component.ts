@@ -30,10 +30,24 @@ export class LoginComponent implements OnInit {
     this.spinner.show();
     this._authentication
       .signIn(this.email, this.password)
-      .then(() => {
-        this.spinner.hide();
-        this._swal.mixinSwal('Se ha iniciado sesión correctamente!', 'success');
-        this.router.navigate(['valtico-admin/dashboard']);
+      .then((auth) => {
+        const token = this._authentication
+          .createToken(auth.user.email)
+          .subscribe((backend) => {
+            if (backend.ok) {
+              localStorage.setItem('_token', backend.token);
+              this.spinner.hide();
+              this._swal.mixinSwal(
+                'Se ha iniciado sesión correctamente!',
+                'success'
+              );
+              this.router.navigate(['valtico-admin/dashboard']);
+              token.unsubscribe();
+            } else {
+              this.transformError('');
+              token.unsubscribe();
+            }
+          });
       })
       .catch((err) => {
         this.spinner.hide();

@@ -1,11 +1,13 @@
-<div class="uk-card uk-card-default">
+<div class="uk-card uk-card-default" [style.maxWidth]="maxWidth">
   <a
     *ngIf="isAdmin"
     class="uk-icon-button"
     uk-icon="more-vertical"
     type="button"
   ></a>
-  <div uk-dropdown="mode: click; delay-hide: 100; animation: uk-animation-scale-up; pos: bottom-right">
+  <div
+    uk-dropdown="mode: click; delay-hide: 100; animation: uk-animation-scale-up; pos: bottom-right"
+  >
     <ul class="uk-nav uk-dropdown-nav">
       <li class="uk-active"><a href="#">Active</a></li>
       <li><a href="#">Item</a></li>
@@ -18,7 +20,14 @@
   </div>
 
   <div class="uk-card-media-top uk-text-center" [routerLink]="route">
-    <img [src]="frontImg" alt="" style="width: 100%;" />
+    <img
+      [src]="
+        frontImg ||
+        'https://www.sspc.org/wp-content/uploads/2019/05/no-image.png'
+      "
+      alt=""
+      style="width: 100%;"
+    />
   </div>
   <div class="uk-card-body uk-padding-small">
     <article class="uk-article" style="padding-bottom: 28px;">
@@ -34,9 +43,9 @@
 
       <div class="uk-grid-small uk-child-width-auto" uk-grid>
         <div>
-          <a class="uk-button uk-button-text" [routerLink]="route"
-            >Continuar Leyendo</a
-          >
+          <a class="uk-button uk-button-text" [routerLink]="route">
+            Continuar Leyendo
+          </a>
         </div>
       </div>
     </article>

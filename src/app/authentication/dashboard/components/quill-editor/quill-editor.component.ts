@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import Quill from 'quill';
 import ImageResize from 'quill-image-resize-module';
 import { ImageDrop } from 'quill-image-drop-module';
@@ -13,6 +13,7 @@ Quill.register('modules/imageDrop', ImageDrop);
   styleUrls: ['./quill-editor.component.scss'],
 })
 export class QuillEditorComponent implements OnInit {
+  @Output() innerHTML = new EventEmitter<any>();
   constructor() {}
 
   ngOnInit(): void {
@@ -25,5 +26,13 @@ export class QuillEditorComponent implements OnInit {
         imageDrop: true,
       },
     });
+
+    quill.on('text-change', () => {
+      this.changeContent();
+    });
+  }
+
+  changeContent() {
+    this.innerHTML.emit(document.querySelector('#editor > .ql-editor'));
   }
 }

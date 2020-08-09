@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
-  constructor(private readonly fireAuth: AngularFireAuth) {}
+  constructor(
+    private readonly fireAuth: AngularFireAuth,
+    private http: HttpClient
+  ) {}
 
   authState() {
     return this.fireAuth.authState;
@@ -22,6 +26,15 @@ export class AuthenticationService {
   forgotPassword() {
     return this.fireAuth.sendPasswordResetEmail(
       'valticochile.hosting@gmail.com'
+    );
+  }
+
+  createToken(admin: string) {
+    const headers = new HttpHeaders().append('admin', admin);
+
+    return this.http.get<{ ok: boolean; token: string }>(
+      `http://localhost:3000/login`,
+      { headers }
     );
   }
 }

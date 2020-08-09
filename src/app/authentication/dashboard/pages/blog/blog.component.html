@@ -1,5 +1,3 @@
-<!-- <quill-editor></quill-editor> -->
-
 <div
   class="uk-child-width-1-1@xs uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l uk-child-width-1-5@xl uk-margin-medium-bottom"
   uk-grid
@@ -9,6 +7,7 @@
       [title]="blog.title"
       [text]="blog.front.shortDescription"
       [isAdmin]="true"
+      [route]="null"
     >
     </app-element-post>
   </div>
@@ -23,18 +22,79 @@
       type="button"
       uk-close
     ></button>
-    <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid uk-height-viewport>
+    <div
+      class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle"
+      uk-grid
+      uk-height-viewport
+    >
       <div class="uk-padding-large">
-        <h1>Headline</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+        <h1 class="uk-text-center mb-4">Creación del Blog</h1>
+        <div class="form-group mb-4">
+          <label for="exampleFormControlTitle1">Título del Blog</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlTitle1"
+            [(ngModel)]="title"
+          />
+        </div>
+        <div class="custom-file mb-2">
+          <input
+            type="file"
+            class="custom-file-input"
+            id="customFile"
+            (change)="onUploadChange($event, true)"
+          />
+          <label class="custom-file-label" for="customFile">
+            Suba la imagen de portada
+          </label>
+        </div>
+        <div class="form-group mb-4">
+          <label for="exampleFormControlDescription1">Breve descripción</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlDescription1"
+            [(ngModel)]="shortDescription"
+          />
+        </div>
+        <div class="custom-file mb-2">
+          <input
+            type="file"
+            class="custom-file-input"
+            id="customFile"
+            (change)="onUploadChange($event, false)"
+          />
+          <label class="custom-file-label" for="customFile">
+            Suba la imagen del blog
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Contenido del blog</label>
+          <quill-editor (innerHTML)="inner($event)"></quill-editor>
+        </div>
+        <div class="form-group text-center">
+          <button
+            type="button"
+            class="btn btn-primary mt-2 px-4"
+            (click)="createBlog()"
+          >
+            Agregar Blog
+          </button>
+        </div>
+      </div>
+      <div class="uk-padding-large">
+        <h1 class="uk-text-center mb-4">Previsualización</h1>
+        <div class="uk-flex" style="justify-content: center;">
+          <app-element-post
+            [title]="title"
+            [frontImg]="base64textStringPortada"
+            [text]="shortDescription"
+            maxWidth="270px"
+            [route]="null"
+          ></app-element-post>
+        </div>
+        <div class="ql-editor" [innerHTML]="content"></div>
       </div>
     </div>
   </div>
