@@ -5,22 +5,23 @@
     uk-icon="more-vertical"
     type="button"
   ></a>
-  <div
+  <div class="my-dropdown"
     uk-dropdown="mode: click; delay-hide: 100; animation: uk-animation-scale-up; pos: bottom-right"
   >
-    <ul class="uk-nav uk-dropdown-nav">
-      <li class="uk-active"><a href="#">Active</a></li>
-      <li><a href="#">Item</a></li>
-      <li class="uk-nav-header">Header</li>
-      <li><a href="#">Item</a></li>
-      <li><a href="#">Item</a></li>
-      <li class="uk-nav-divider"></li>
-      <li><a href="#">Item</a></li>
+    <ul class="uk-nav uk-dropdown-nav uk-text-right">
+      <li><a (click)="dropdownEvent('Editar')">Editar</a></li>
+      <li *ngIf="!enabled">
+        <a (click)="dropdownEvent('Habilitar')">Habilitar</a>
+      </li>
+      <li *ngIf="enabled">
+        <a (click)="dropdownEvent('Deshabilitar')">Deshabilitar</a>
+      </li>
     </ul>
   </div>
 
   <div class="uk-card-media-top uk-text-center" [routerLink]="route">
     <img
+      [ngClass]="{ disabled: !enabled }"
       [src]="
         frontImg ||
         'https://www.sspc.org/wp-content/uploads/2019/05/no-image.png'

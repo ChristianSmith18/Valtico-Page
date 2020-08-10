@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import UIkit from 'uikit';
 @Component({
   selector: 'app-element-post',
   templateUrl: './element-post.component.html',
@@ -16,8 +16,20 @@ export class ElementPostComponent implements OnInit {
   @Input() route = '';
   @Input() isAdmin = false;
   @Input() maxWidth = 'unset';
+  @Input() enabled = true;
+
+  @Output() dropdownClick = new EventEmitter<
+    'Editar' | 'Habilitar' | 'Deshabilitar'
+  >();
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  dropdownEvent(event: 'Editar' | 'Habilitar' | 'Deshabilitar') {
+    document.querySelectorAll('.my-dropdown').forEach((tag) => {
+      UIkit.dropdown(tag).hide();
+    });
+    this.dropdownClick.emit(event);
+  }
 }

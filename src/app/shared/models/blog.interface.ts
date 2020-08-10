@@ -1,19 +1,23 @@
 export class FrontBlog {
-  readonly imgFront: string;
+  imgFront: string;
 
-  readonly shortDescription: string;
+  shortDescription: string;
 }
 
 export class CompleteBlog {
-  readonly imgTop: string;
+  imgTop: string;
 
-  readonly article: string;
+  article: string;
 }
 
 export class Blog {
-  readonly title: string;
+  title: string;
 
-  readonly front: FrontBlog;
+  front: FrontBlog;
 
-  readonly complete: CompleteBlog;
+  complete: CompleteBlog;
+
+  enabled: boolean;
+
+  id?: string;
 }
