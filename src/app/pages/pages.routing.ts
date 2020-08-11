@@ -1,3 +1,4 @@
+import { SingleBlogComponent } from './single-blog/single-blog.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home/home.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'clients', component: ClientesComponent },
       { path: 'success', component: CasosDeExitoComponent },
       { path: 'blog', component: BlogComponent },
+      { path: 'blog/:id', component: SingleBlogComponent },
       { path: 'events', component: EventosComponent },
       { path: '**', redirectTo: 'home', pathMatch: 'full' },
     ],

@@ -1,3 +1,14 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="large"
+  color="#fff"
+  type="square-jelly-box"
+  [fullScreen]="true"
+  [zIndex]="99999999"
+>
+  <p style="color: white;">Cargando...</p>
+</ngx-spinner>
+
 <div
   class="uk-child-width-1-1@xs uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l uk-child-width-1-5@xl uk-margin-medium-bottom"
   uk-grid
@@ -10,6 +21,7 @@
       [route]="null"
       [frontImg]="blog.front.imgFront"
       [enabled]="blog.enabled"
+      date="{{ blog.dateAt | displayTime }}"
       (dropdownClick)="dropdownClick($event, blog, i)"
     >
     </app-element-post>
@@ -21,7 +33,7 @@
 <div id="modal-full" class="uk-modal-full animation-slide" uk-modal>
   <div class="uk-modal-dialog">
     <button
-    id="close-button"
+      id="close-button"
       class="uk-modal-close-full uk-close-large"
       type="button"
       uk-close
@@ -49,6 +61,7 @@
             type="file"
             class="custom-file-input"
             id="customFile"
+            accept="image/gif, image/jpeg, image/png"
             (change)="onUploadChange($event, true)"
           />
           <label class="custom-file-label" for="customFile">
@@ -69,6 +82,7 @@
             type="file"
             class="custom-file-input"
             id="customFile"
+            accept="image/gif, image/jpeg, image/png"
             (change)="onUploadChange($event, false)"
           />
           <label class="custom-file-label" for="customFile">
@@ -81,6 +95,7 @@
         </div>
         <div class="form-group text-center">
           <button
+            id="send-data"
             type="button"
             class="btn btn-primary mt-2 px-4"
             (click)="createBlog()"

@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 // Modules
 import { AuthenticationRoutingModule } from './authentication.routing';
+
+// Extern Modules
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 // Components
 import { LoginComponent } from './login/login.component';

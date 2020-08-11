@@ -20,4 +20,6 @@ export class Blog {
   enabled: boolean;
 
   id?: string;
+
+  dateAt?: Date;
 }

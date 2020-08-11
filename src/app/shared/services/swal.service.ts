@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AuthenticationService } from '@src/app/authentication/services/authentication.service';
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
 
@@ -5,7 +7,10 @@ import Swal from 'sweetalert2';
   providedIn: 'root',
 })
 export class SwalService {
-  constructor() {}
+  constructor(
+    private _authentication: AuthenticationService,
+    private router: Router
+  ) {}
 
   confirmSwal() {
     return Swal.fire({
@@ -21,7 +26,9 @@ export class SwalService {
   mixinSwal(
     title: string,
     icon: 'success' | 'error' | 'warning' | 'info' | 'question',
-    timer: number = 3000
+    timer: number = 3000,
+    showConfirmButton: boolean = false,
+    confirmButtonText?: string
   ) {
     const Toast = Swal.mixin({
       toast: true,
@@ -38,6 +45,14 @@ export class SwalService {
     Toast.fire({
       icon,
       title,
+      showConfirmButton,
+      confirmButtonText,
+    }).then((res) => {
+      if (res.value) {
+        this._authentication.signOut().then(() => {
+          this.router.navigate(['valtico-admin/login']);
+        });
+      }
     });
   }
 }

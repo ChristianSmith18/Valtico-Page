@@ -10,9 +10,7 @@ export class AuthenticationComponent implements OnDestroy {
   private authSubscription: Subscription;
 
   constructor(private _authentication: AuthenticationService) {
-    this.authSubscription = this._authentication.authState().subscribe((u) => {
-      console.log('Estoy en AuthenticationComponent', u);
-    });
+    this.authSubscription = this._authentication.authState().subscribe();
   }
 
   ngOnDestroy(): void {

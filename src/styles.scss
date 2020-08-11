@@ -5,6 +5,7 @@
 
 * {
   font-family: "Font Awesome 5", sans-serif;
+  -webkit-user-drag: none;
 }
 
 body {
@@ -37,6 +38,10 @@ body {
 // Sweetalert - Styles
 .swal2-styled {
   min-width: 150px;
+}
+
+.swal2-container {
+  z-index: 99999999999 !important;
 }
 
 // Quill Editor - Styles

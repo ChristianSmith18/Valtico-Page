@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+// Extern modules
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
 // Components
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SocialBarComponent } from './components/social-bar/social-bar.component';
@@ -10,6 +13,7 @@ import { ElementBoxComponent } from './components/element-box/element-box.compon
 import { ElementDescriptionComponent } from './components/element-description/element-description.component';
 import { ElementPostComponent } from './components/element-post/element-post.component';
 import { RouterModule } from '@angular/router';
+import { DisplayTimePipe } from './pipes/display-time.pipe';
 
 const globalComponents = [
   NavbarComponent,
@@ -19,11 +23,12 @@ const globalComponents = [
   ElementBoxComponent,
   ElementDescriptionComponent,
   ElementPostComponent,
+  DisplayTimePipe,
 ];
 
 @NgModule({
   declarations: [...globalComponents],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, NgxSkeletonLoaderModule],
   exports: [...globalComponents],
 })
 export class SharedModule {}

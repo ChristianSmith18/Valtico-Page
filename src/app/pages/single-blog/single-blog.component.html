@@ -1,0 +1,30 @@
+<div class="bg-white mb-2 shadow-sm">
+  <div *ngIf="showBgData" id="bg-data"></div>
+  <div class="container">
+    <br />
+
+    <h1 class="text-center uk-text-secondary">
+      <b>{{ title }}</b>
+    </h1>
+
+    <br />
+
+    <p class="text-center uk-text-meta">
+      {{ subtitle }}
+    </p>
+
+    <div class="text-center mb-2">
+      <img *ngIf="imgBanner" [src]="imgBanner" alt="Imagen de portada" />
+    </div>
+
+    <br />
+
+    <div class="ql-snow">
+      <div id="editor-container" class="ql-editor"></div>
+    </div>
+  </div>
+</div>
+
+<ngx-spinner [fullScreen]="true" type="ball-clip-rotate-multiple" size="medium">
+  <p class="loading" style="color: white;">Cargando blog...</p>
+</ngx-spinner>

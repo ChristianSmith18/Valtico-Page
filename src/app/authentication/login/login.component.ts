@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { SwalService } from '../services/swal.service';
+import { SwalService } from '@shared/services/swal.service';
 
 @Component({
   selector: 'app-login',

@@ -18,6 +18,8 @@ export class ElementPostComponent implements OnInit {
   @Input() maxWidth = 'unset';
   @Input() enabled = true;
 
+  @Input() skeleton = false;
+
   @Output() dropdownClick = new EventEmitter<
     'Editar' | 'Habilitar' | 'Deshabilitar'
   >();

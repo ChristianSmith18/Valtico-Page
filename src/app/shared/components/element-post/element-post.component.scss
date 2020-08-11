@@ -34,7 +34,7 @@ img {
   -webkit-user-drag: none;
   -webkit-user-select: none;
   user-select: none;
-  transition: filter linear .3s;
+  transition: filter linear 0.3s;
 
   &.disabled {
     filter: grayscale(0.9) blur(1px);

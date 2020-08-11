@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarRoutes } from '@src/app/shared/components/navbar/navbar.component';
-import { SwalService } from '../../../services/swal.service';
+import { SwalService } from '@shared/services/swal.service';
 import { AuthenticationService } from '@src/app/authentication/services/authentication.service';
 import { Router } from '@angular/router';
 

@@ -6,6 +6,9 @@ import { RouterModule } from '@angular/router';
 import { PagesRoutingModule } from './pages.routing';
 import { SharedModule } from '@shared/shared.module';
 
+// Extern Modules
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 // Components
 import { HomeComponent } from './home/home.component';
 import { ServiciosComponent } from './servicios/servicios.component';
@@ -18,6 +21,7 @@ import { EventosComponent } from './eventos/eventos.component';
 import { PagesComponent } from './pages.component';
 
 import { CarouselComponent } from './home/components/carousel/carousel.component';
+import { SingleBlogComponent } from './single-blog/single-blog.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,14 @@ import { CarouselComponent } from './home/components/carousel/carousel.component
     EventosComponent,
     CasosDeExitoComponent,
     CarouselComponent,
+    SingleBlogComponent,
   ],
-  imports: [CommonModule, RouterModule, SharedModule, PagesRoutingModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    SharedModule,
+    PagesRoutingModule,
+    NgxSpinnerModule,
+  ],
 })
 export class PagesModule {}

@@ -2,7 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BlogService } from '@shared/services/blog.service';
 import { Subscription } from 'rxjs';
 import { Blog } from '@shared/models/blog.interface';
+import { SwalService } from '@shared/services/swal.service';
 import UIkit from 'uikit';
+import { NgxSpinnerService } from 'ngx-spinner';
+
+import Compressor from 'compressorjs';
 
 @Component({
   selector: 'app-blog',
@@ -22,12 +26,24 @@ export class BlogComponent implements OnInit, OnDestroy {
   public editMode = false;
   public index = null;
 
-  constructor(private _blog: BlogService) {}
+  constructor(
+    private _blog: BlogService,
+    private spinner: NgxSpinnerService,
+    private _swal: SwalService
+  ) {}
 
   ngOnInit(): void {
-    this.blogSubscription = this._blog.getAllBlogs().subscribe((response) => {
-      this.blogs = response.blogs;
-    });
+    this.spinner.show();
+    this.blogSubscription = this._blog.getAllBlogs(true).subscribe(
+      (response) => {
+        this.blogs = response.blogs;
+        this.spinner.hide();
+      },
+      (err) => {
+        this.spinner.hide();
+        this.readErrorCodes(err.status);
+      }
+    );
 
     // Para agregar el effecto de slide hacia abajo al cerrar el modal
     document
@@ -49,6 +65,8 @@ export class BlogComponent implements OnInit, OnDestroy {
         this.clearModal();
       }
     });
+
+    this.closeSpinner();
   }
 
   ngOnDestroy(): void {
@@ -68,26 +86,27 @@ export class BlogComponent implements OnInit, OnDestroy {
         return;
       }
       const reader = new FileReader();
+      const compFile = new Compressor(file, {
+        quality: 0.6,
+        success: (result) => {
+          reader.readAsDataURL(result);
 
-      if (portada) {
-        reader.onload = this.handleReaderLoadedP.bind(this);
-      } else {
-        reader.onload = this.handleReaderLoadedC.bind(this);
-      }
-      reader.readAsBinaryString(file);
+          reader.onloadend = () => {
+            const base64data = reader.result.toString();
+            if (portada) {
+              this.base64textStringPortada = base64data;
+              (document.querySelector(
+                '#exampleFormControlDescription1'
+              ) as HTMLInputElement).select();
+            } else {
+              this.base64textStringContenido = base64data;
+            }
+          };
+        },
+      });
     } else {
       (evt.target as HTMLInputElement).value = '';
     }
-  }
-
-  handleReaderLoadedP(e) {
-    this.base64textStringPortada =
-      'data:image/png;base64,' + btoa(e.target.result);
-  }
-
-  handleReaderLoadedC(e) {
-    this.base64textStringContenido =
-      'data:image/png;base64,' + btoa(e.target.result);
   }
 
   inner(event: HTMLDivElement) {
@@ -95,6 +114,7 @@ export class BlogComponent implements OnInit, OnDestroy {
   }
 
   createBlog() {
+    this.spinner.show();
     const blog: Blog = {
       title: this.title,
       front: {
@@ -110,21 +130,37 @@ export class BlogComponent implements OnInit, OnDestroy {
     if (this.editMode) {
       if (this.index !== null) {
         blog.enabled = this.blogs[this.index].enabled;
-        this._blog
-          .updateBlog(this.blogs[this.index].id, blog)
-          .subscribe((e) => {
+        this._blog.updateBlog(this.blogs[this.index].id, blog).subscribe(
+          (e) => {
             this.blogs[this.index] = blog;
             this.index = null;
             UIkit.modal(document.querySelector('#modal-full')).hide();
-          });
+            this.spinner.hide();
+            this.clearModal();
+          },
+          (err) => {
+            this.readErrorCodes(err.status);
+
+            this.spinner.hide();
+          }
+        );
       }
     } else {
-      this._blog.createBlog(blog).subscribe((e) => {
-        this.blogs.push(e);
-        this.clearModal();
-        UIkit.modal(document.querySelector('#modal-full')).hide();
-      });
+      this._blog.createBlog(blog).subscribe(
+        (e) => {
+          this.blogs.push(e);
+          this.clearModal();
+          UIkit.modal(document.querySelector('#modal-full')).hide();
+          this.spinner.hide();
+          this.clearModal();
+        },
+        (err) => {
+          this.readErrorCodes(err.status);
+          this.spinner.hide();
+        }
+      );
     }
+    this.closeSpinner();
   }
 
   dropdownClick(
@@ -135,9 +171,14 @@ export class BlogComponent implements OnInit, OnDestroy {
     switch (event) {
       case 'Habilitar':
       case 'Deshabilitar':
-        this._blog.changeState(blog.id, !blog.enabled).subscribe(() => {
-          this.blogs[index].enabled = !blog.enabled;
-        });
+        this._blog.changeState(blog.id, !blog.enabled).subscribe(
+          () => {
+            this.blogs[index].enabled = !blog.enabled;
+          },
+          (err) => {
+            this.readErrorCodes(err.status);
+          }
+        );
         break;
 
       default:
@@ -157,7 +198,6 @@ export class BlogComponent implements OnInit, OnDestroy {
         UIkit.modal(document.querySelector('#modal-full')).show();
         break;
     }
-    console.log(index);
   }
 
   clearModal() {
@@ -166,5 +206,33 @@ export class BlogComponent implements OnInit, OnDestroy {
     this.base64textStringContenido = null;
     this.shortDescription = '';
     document.querySelector('#editor > .ql-editor').innerHTML = '';
+  }
+
+  closeSpinner() {
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 5000);
+  }
+
+  readErrorCodes(code: number) {
+    switch (code) {
+      case 0:
+        this._swal.mixinSwal('Error de conexión.', 'error');
+        break;
+      case 400:
+        this._swal.mixinSwal('Debe rellenar todos los campos.', 'error');
+        break;
+      case 401:
+        this._swal.mixinSwal(
+          'No estás autenticado, por favor cierre sesión y vuelva a intentarlo.',
+          'error',
+          3000,
+          true,
+          'Salir'
+        );
+        break;
+      default:
+        break;
+    }
   }
 }

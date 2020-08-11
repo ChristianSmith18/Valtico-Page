@@ -1,11 +1,17 @@
-<div class="uk-card uk-card-default" [style.maxWidth]="maxWidth">
+<div
+  *ngIf="!skeleton"
+  class="uk-card uk-card-default"
+  [style.maxWidth]="maxWidth"
+  [style.minHeight]="'100%'"
+>
   <a
     *ngIf="isAdmin"
     class="uk-icon-button"
     uk-icon="more-vertical"
     type="button"
   ></a>
-  <div class="my-dropdown"
+  <div
+    class="my-dropdown"
     uk-dropdown="mode: click; delay-hide: 100; animation: uk-animation-scale-up; pos: bottom-right"
   >
     <ul class="uk-nav uk-dropdown-nav uk-text-right">
@@ -42,13 +48,47 @@
 
       <p>{{ text }}</p>
 
-      <div class="uk-grid-small uk-child-width-auto" uk-grid>
+      <div *ngIf="!isAdmin" class="uk-grid-small uk-child-width-auto" uk-grid>
         <div>
           <a class="uk-button uk-button-text" [routerLink]="route">
             Continuar Leyendo
           </a>
         </div>
       </div>
+    </article>
+  </div>
+</div>
+
+<!-- ********************************************************************************************************* -->
+
+<div *ngIf="skeleton" class="uk-card uk-card-default">
+  <div class="uk-card-media-top uk-text-center">
+    <ngx-skeleton-loader
+      animation="progress"
+      [theme]="{ 'border-radius': 'unset', height: '200px' }"
+    ></ngx-skeleton-loader>
+  </div>
+  <div class="uk-card-body uk-padding-small">
+    <article class="uk-article" style="padding-bottom: 28px;">
+      <ngx-skeleton-loader
+        animation="progress"
+        [theme]="{ 'border-radius': 'unset', height: '20px', width: '80%' }"
+      ></ngx-skeleton-loader>
+
+      <h1 class="uk-comment-title uk-margin-remove-top">
+        <ngx-skeleton-loader
+          animation="progress"
+          [theme]="{ 'border-radius': 'unset', height: '35px' }"
+        ></ngx-skeleton-loader>
+      </h1>
+
+      <p>
+        <ngx-skeleton-loader
+          [count]="4"
+          animation="progress"
+          [theme]="{ 'border-radius': 'unset', height: '20px', width: '90%' }"
+        ></ngx-skeleton-loader>
+      </p>
     </article>
   </div>
 </div>

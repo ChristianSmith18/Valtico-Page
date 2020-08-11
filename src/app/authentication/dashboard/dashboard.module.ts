@@ -6,6 +6,9 @@ import { CommonModule } from '@angular/common';
 // Modules
 import { DashboardRoutingModule } from './dashboard.routing';
 
+// Extern Modules
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 // Pages Components
 import { DashboardComponent } from './dashboard.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -39,6 +42,12 @@ import { FabButtonComponent } from './components/fab-button/fab-button.component
     QuillEditorComponent,
     FabButtonComponent,
   ],
-  imports: [CommonModule, FormsModule, DashboardRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    DashboardRoutingModule,
+    SharedModule,
+    NgxSpinnerModule,
+  ],
 })
 export class DashboardModule {}
