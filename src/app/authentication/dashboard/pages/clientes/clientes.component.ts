@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ClientesService } from '@shared/services/clientes.service';
+import { Cliente } from '@shared/models/cliente.interface';
 
 import Compressor from 'compressorjs';
 
@@ -8,16 +10,24 @@ import Compressor from 'compressorjs';
   styleUrls: ['./clientes.component.scss'],
 })
 export class ClientesComponent implements OnInit {
-  public clients = new Array(5);
+  public clients: Cliente[] = [];
   public currentIndex: number = null;
   public currenImg: string = null;
+  public currenAdd: number = null;
 
-  constructor() {}
+  constructor(private _clientes: ClientesService) {
+    this._clientes.getClientes(true).subscribe(({ clientes }) => {
+      this.clients = clientes;
+    });
+  }
 
   ngOnInit(): void {}
 
   changeImg(index: number) {
-    if (index === this.currentIndex) {
+    if (
+      index === this.currentIndex ||
+      (index === this.currenAdd && this.currenAdd !== null)
+    ) {
       (document.querySelector('#tempImg') as HTMLInputElement).click();
     }
   }
@@ -30,18 +40,35 @@ export class ClientesComponent implements OnInit {
   }
 
   guardar(index: number) {
+    const newCliente = this.clients[index];
+    let key = true;
     const li = document.querySelectorAll('ul[uk-accordion] > li')[index];
     li.querySelectorAll('[contenteditable]').forEach((content) => {
-      console.log(content.innerHTML);
+      if (key) {
+        newCliente.title = content.innerHTML.trim();
+        key = false;
+      }
+      newCliente.description = content.innerHTML.trim();
     });
-    console.log(this.currenImg);
-    this.currentIndex = null;
-    this.currenImg = null;
+    newCliente.base64Img = this.currenImg;
+    this._clientes
+      .updateCliente(this.clients[index].id, this.clients[index])
+      .subscribe(({ ok }) => {
+        if (ok) {
+          this.currentIndex = null;
+          this.currenImg = null;
+        }
+      });
   }
 
-  eliminar(index: number) {
-    const li = document.querySelectorAll('ul[uk-accordion] > li')[index];
-    li.remove();
+  cambiarEstado(index: number, newState: boolean) {
+    this._clientes
+      .setStateCliente(this.clients[index].id, newState)
+      .subscribe(({ ok }) => {
+        if (ok) {
+          this.clients[index].enabled = newState;
+        }
+      });
   }
 
   onUploadChange(evt: any) {
@@ -76,5 +103,58 @@ export class ClientesComponent implements OnInit {
     } else {
       (evt.target as HTMLInputElement).value = '';
     }
+  }
+
+  crearTarjeta() {
+    if (this.currenAdd === null) {
+      this.currenAdd = this.clients.length;
+
+      this.clients.push({
+        title: 'Nombre del Cliente',
+        description:
+          'Descripción breve acerca del cliente o algún contenido relacionado a él.',
+        base64Img:
+          'https://s3.amazonaws.com/sidramedicalsupply/site/sidra_1565678246_sidra-medical-supply.png',
+        enabled: true,
+      });
+
+      this.currentIndex = this.clients.length - 1;
+      // this.currenImg = document.querySelectorAll('img')[
+      //   this.currentIndex + 1
+      // ].src;
+      setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 100);
+    }
+  }
+
+  crearCliente(index: number) {
+    const newCliente = this.clients[index];
+    let key = true;
+    const li = document.querySelectorAll('ul[uk-accordion] > li')[index];
+    li.querySelectorAll('[contenteditable]').forEach((content) => {
+      if (key) {
+        newCliente.title = content.innerHTML.trim();
+        key = false;
+      }
+      newCliente.description = content.innerHTML.trim();
+    });
+    newCliente.base64Img = this.currenImg;
+    this._clientes.createCliente(this.clients[index]).subscribe(
+      ({ ok }) => {
+        if (ok) {
+          this.currenAdd = null;
+          this.currentIndex = null;
+          this.currenImg = null;
+        }
+      },
+      (err) => {
+        this.clients[index].base64Img =
+          'https://s3.amazonaws.com/sidramedicalsupply/site/sidra_1565678246_sidra-medical-supply.png';
+      }
+    );
+  }
+
+  cancelarCliente() {
+    this.clients.pop();
+    this.currenAdd = null;
   }
 }

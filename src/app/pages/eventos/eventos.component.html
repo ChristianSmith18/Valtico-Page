@@ -1,18 +1,28 @@
+<div *ngIf="noData" class="no-data">
+  <h2>No hay eventos en este momento..</h2>
+</div>
+
 <div
-  class="uk-child-width-1-1@xs uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l uk-child-width-1-5@xl"
+  class="uk-child-width-1-1@xs uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l uk-child-width-1-5@xl uk-margin-medium-bottom"
   uk-grid
 >
-  <div *ngFor="let item of [1, 1, 1, 1, 1]">
-    <!-- *ngIf="base64textString" -->
-    <!-- [frontImg]="base64textString" -->
-    <app-element-post
-      title="10 mejoras que su organización puede implementar con ITIL 4"
-      text="¿Alguna vez sintió que su organización está en una “caminadora o cinta para correr” tratando de mantener el ritmo de todos los cambios y la tecnología?"
-      frontImg="https://pinkelephant-latam.com/wp-content/uploads/2019/09/banner-conferencia-pink-20.jpg"
-      tag="Eventos"
-    >
-    </app-element-post>
-  </div>
+  <ng-container *ngIf="loaded">
+    <div *ngFor="let evento of eventos; let i = index">
+      <app-element-post
+        [title]="evento.title"
+        [text]="evento.front.shortDescription"
+        [route]="transformRoute(evento.id)"
+        [frontImg]="evento.front.imgFront"
+        date="{{ evento.dateAt | displayTime }}"
+        tag="Eventos"
+      >
+      </app-element-post>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!loaded">
+    <div *ngFor="let item of [1, 1, 1, 1]; let i = index">
+      <app-element-post [skeleton]="true"></app-element-post>
+    </div>
+  </ng-container>
 </div>
-<!-- <input type="file" (change)="onUploadChange($event)" name="" id="" accept=".png, .jpg, .jpeg"> -->
-<!-- <img *ngIf="base64textString" [src]="base64textString" alt="" id="img"> -->

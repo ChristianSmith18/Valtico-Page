@@ -235,4 +235,8 @@ export class BlogComponent implements OnInit, OnDestroy {
         break;
     }
   }
+
+  openModal() {
+    UIkit.modal(document.querySelector('#modal-full')).show();
+  }
 }

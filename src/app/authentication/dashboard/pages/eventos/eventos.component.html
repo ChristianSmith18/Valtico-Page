@@ -1,1 +1,123 @@
-<p>eventos works!</p>
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="large"
+  color="#fff"
+  type="square-jelly-box"
+  [fullScreen]="true"
+  [zIndex]="99999999"
+>
+  <p style="color: white;">Cargando...</p>
+</ngx-spinner>
+
+<div
+  class="uk-child-width-1-1@xs uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l uk-child-width-1-5@xl uk-margin-medium-bottom"
+  uk-grid
+>
+  <div *ngFor="let evento of eventos; let i = index">
+    <app-element-post
+      [title]="evento.title"
+      [text]="evento.front.shortDescription"
+      [isAdmin]="true"
+      [route]="null"
+      [frontImg]="evento.front.imgFront"
+      [enabled]="evento.enabled"
+      date="{{ evento.dateAt | displayTime }}"
+      tag="Eventos"
+      (dropdownClick)="dropdownClick($event, evento, i)"
+    >
+    </app-element-post>
+  </div>
+</div>
+
+<fab-button (click)="openModal()"></fab-button>
+
+<div id="modal-full" class="uk-modal-full animation-slide" uk-modal>
+  <div class="uk-modal-dialog">
+    <button
+      id="close-button"
+      class="uk-modal-close-full uk-close-large"
+      type="button"
+      uk-close
+    ></button>
+    <div
+      class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle"
+      uk-grid
+      uk-height-viewport
+    >
+      <div class="uk-padding-large">
+        <h1 class="uk-text-center mb-4">
+          {{ editMode ? "Edición del Evento" : "Creación del Evento" }}
+        </h1>
+        <div class="form-group mb-4">
+          <label for="exampleFormControlTitle1">Título del Evento</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlTitle1"
+            [(ngModel)]="title"
+          />
+        </div>
+        <div class="custom-file mb-2">
+          <input
+            type="file"
+            class="custom-file-input"
+            id="customFile"
+            accept="image/gif, image/jpeg, image/png"
+            (change)="onUploadChange($event, true)"
+          />
+          <label class="custom-file-label" for="customFile">
+            Suba la imagen de portada
+          </label>
+        </div>
+        <div class="form-group mb-4">
+          <label for="exampleFormControlDescription1">Breve descripción</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlDescription1"
+            [(ngModel)]="shortDescription"
+          />
+        </div>
+        <div class="custom-file mb-2">
+          <input
+            type="file"
+            class="custom-file-input"
+            id="customFile"
+            accept="image/gif, image/jpeg, image/png"
+            (change)="onUploadChange($event, false)"
+          />
+          <label class="custom-file-label" for="customFile">
+            Suba la imagen del evento
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Contenido del evento</label>
+          <quill-editor (innerHTML)="inner($event)"></quill-editor>
+        </div>
+        <div class="form-group text-center">
+          <button
+            id="send-data"
+            type="button"
+            class="btn btn-primary mt-2 px-4"
+            (click)="createEvento()"
+          >
+            {{ editMode ? "Actualizar evento" : "Agregar evento" }}
+          </button>
+        </div>
+      </div>
+      <div class="uk-padding-large">
+        <h1 class="uk-text-center mb-4">Previsualización</h1>
+        <div class="uk-flex" style="justify-content: center;">
+          <app-element-post
+            [title]="title"
+            [frontImg]="base64textStringPortada"
+            [text]="shortDescription"
+            maxWidth="270px"
+            [route]="null"
+          ></app-element-post>
+        </div>
+        <!-- <div class="ql-editor" [innerHTML]="content"></div> -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -22,6 +22,7 @@ import { PagesComponent } from './pages.component';
 
 import { CarouselComponent } from './home/components/carousel/carousel.component';
 import { SingleBlogComponent } from './single-blog/single-blog.component';
+import { SingleEventoComponent } from './single-evento/single-evento.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { SingleBlogComponent } from './single-blog/single-blog.component';
     CasosDeExitoComponent,
     CarouselComponent,
     SingleBlogComponent,
+    SingleEventoComponent,
   ],
   imports: [
     CommonModule,

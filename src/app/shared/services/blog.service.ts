@@ -1,5 +1,6 @@
+import { TokenService } from './token.service';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '@src/environments/environment';
 import { Blog } from './../models/blog.interface';
 
@@ -18,7 +19,7 @@ interface SingleResponse {
   providedIn: 'root',
 })
 export class BlogService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private _token: TokenService) {}
 
   public getAllBlogs(admin: boolean) {
     if (admin) {
@@ -35,13 +36,13 @@ export class BlogService {
 
   public createBlog(blog: Blog) {
     return this.http.post<Blog>(`${environment.apiUrl}/blogs`, blog, {
-      headers: this.generateSecurity(),
+      headers: this._token.generateSecurityToken(),
     });
   }
 
   public updateBlog(id: string, blog: Blog) {
     return this.http.put<Blog>(`${environment.apiUrl}/blogs?id=${id}`, blog, {
-      headers: this.generateSecurity(),
+      headers: this._token.generateSecurityToken(),
     });
   }
 
@@ -50,18 +51,8 @@ export class BlogService {
       `${environment.apiUrl}/blogs/state?id=${id}`,
       { enabled: newState },
       {
-        headers: this.generateSecurity(),
+        headers: this._token.generateSecurityToken(),
       }
     );
-  }
-
-  private generateSecurity(): HttpHeaders {
-    const token = localStorage.getItem('_token');
-    const headers = new HttpHeaders().append(
-      'authorization',
-      `Bearer ${token}`
-    );
-
-    return headers;
   }
 }
