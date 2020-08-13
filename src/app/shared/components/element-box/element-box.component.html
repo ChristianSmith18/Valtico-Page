@@ -1,14 +1,60 @@
-<div class="uk-card uk-card-default">
+<div class="h-100 uk-card uk-card-default position-relative">
+  <a
+    *ngIf="isAdmin"
+    class="uk-icon-button"
+    uk-icon="more-vertical"
+    type="button"
+  ></a>
+  <div
+    class="my-dropdown"
+    uk-dropdown="mode: click; delay-hide: 100; animation: uk-animation-scale-up; pos: bottom-right"
+  >
+    <ul class="uk-nav uk-dropdown-nav uk-text-right">
+      <li><a (click)="dropdownEvent('Editar')">Editar</a></li>
+      <li *ngIf="!enabled">
+        <a (click)="dropdownEvent('Habilitar')">Habilitar</a>
+      </li>
+      <li *ngIf="enabled">
+        <a (click)="dropdownEvent('Deshabilitar')">Deshabilitar</a>
+      </li>
+    </ul>
+  </div>
+
   <div *ngIf="getType" class="card-title-container">
     <h3 class="uk-card-title">{{ title }}</h3>
   </div>
 
-  <div class="uk-card-media-top uk-inline-clip uk-transition-toggle" tabindex="0">
-    <a href="#modal-full" uk-toggle>
-      <img [src]="imgStatic" alt="">
-      <img class="uk-transition-scale-up uk-position-cover" [src]="imgHover" alt="">
-      <div *ngIf="!getType" class="uk-overlay uk-overlay-primary uk-position-bottom uk-padding-small">
-        <h3 class="uk-margin-remove">{{ title }}</h3>
+  <div
+    class="uk-card-media-top uk-inline-clip uk-transition-toggle"
+    tabindex="0"
+  >
+    <a *ngIf="!isAdmin" href="#modal-full" uk-toggle>
+      <img [src]="imgStatic" alt="" />
+      <img
+        class="uk-transition-scale-up uk-position-cover"
+        [src]="imgHover"
+        alt=""
+      />
+      <div
+        *ngIf="!getType"
+        class="uk-overlay uk-overlay-primary uk-position-bottom uk-padding-small"
+      >
+        <h3 class="uk-margin-remove" style="font-size: 1.4rem;">{{ title }}</h3>
+      </div>
+    </a>
+    <a *ngIf="isAdmin">
+      <img [ngClass]="{ disabled: !enabled }" [src]="imgStatic" alt="" />
+      <img
+        [ngClass]="{ disabled: !enabled }"
+        class="uk-transition-scale-up uk-position-cover"
+        [src]="imgHover"
+        alt=""
+      />
+      <div
+        *ngIf="!getType"
+        class="uk-overlay uk-overlay-primary uk-position-bottom uk-padding-small"
+      >
+        <h3 class="uk-margin-remove" style="font-size: 1.4rem;">{{ title }}</h3>
       </div>
     </a>
   </div>

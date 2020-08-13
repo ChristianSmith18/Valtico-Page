@@ -45,7 +45,7 @@ export class BlogComponent implements OnInit, OnDestroy {
       }
     );
 
-    // Para agregar el effecto de slide hacia abajo al cerrar el modal
+    // Para agregar el efecto de slide hacia abajo al cerrar el modal
     document
       .querySelector('#modal-full button')
       .addEventListener('click', () => {

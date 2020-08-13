@@ -2,15 +2,23 @@
   <div class="uk-width-1-1@m">
     <div class="uk-grid-match" uk-grid>
       <div class="uk-width-expand">
-        <app-carousel [carouselControllers]="false" [options]="options"></app-carousel>
+        <app-carousel
+          [carouselControllers]="false"
+          [options]="options"
+        ></app-carousel>
       </div>
       <div class="uk-width-1-3 uk-visible@m uk-padding-remove-left">
-        <div class="uk-card uk-card-default uk-card-body carousel-box uk-padding-remove"
-          style="background-color: #8bcdcd;">
+        <div
+          class="uk-card uk-card-default uk-card-body carousel-box uk-padding-remove"
+          style="background-color: #8bcdcd;"
+        >
           <ul class="uk-padding-remove">
-            <li *ngFor="let slide of slides; let i = index; let total = count"
-              [ngClass]="{'index-active': i === indexSlideActive}" [style.height]="setHeight(total)"
-              (click)="setIndex(i)">
+            <li
+              *ngFor="let slide of slides; let i = index; let total = count"
+              [ngClass]="{ 'index-active': i === indexSlideActive }"
+              [style.height]="setHeight(total)"
+              (click)="setIndex(i)"
+            >
               <div class="bg-text">
                 <h3 class="uk-margin-remove">{{ slide.title }}</h3>
                 <p class="uk-margin-remove">{{ slide.description }}</p>
@@ -22,11 +30,19 @@
     </div>
   </div>
   <div class="uk-width-1-2@m">
-    <div routerLink="/products" class="uk-card uk-card-default uk-card-body boxes" style="background-color: #f1c5c5;">
-      Productos</div>
+    <div
+      routerLink="/products"
+      class="uk-card uk-card-default uk-card-body boxes products-box"
+    >
+      <span class="banner-text">Productos</span>
+    </div>
   </div>
   <div class="uk-width-1-2@m">
-    <div routerLink="/services" class="uk-card uk-card-default uk-card-body boxes" style="background-color: #faf0af;">
-      Servicios</div>
+    <div
+      routerLink="/services"
+      class="uk-card uk-card-default uk-card-body boxes services-box"
+    >
+      <span class="banner-text">Servicios</span>
+    </div>
   </div>
 </div>

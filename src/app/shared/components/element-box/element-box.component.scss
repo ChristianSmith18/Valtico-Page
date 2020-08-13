@@ -10,3 +10,18 @@
     font-size: 1.8rem;
   }
 }
+
+.uk-icon-button {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+
+  background: transparent;
+  color: gray;
+  transition: all ease-in-out 0.1s;
+
+  &:hover {
+    color: rgba(white, 0.8);
+    background: rgba(black, 0.2);
+  }
+}

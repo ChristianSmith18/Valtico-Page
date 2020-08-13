@@ -2,13 +2,22 @@
   *ngIf="contenido"
   class="uk-section uk-preserve-color uk-padding-remove-top"
 >
+  <div class="w-100 text-right mb-2">
+    <button *ngIf="!editMode" class="btn btn-primary" (click)="setEditMode()">
+      Editar
+    </button>
+    <button *ngIf="editMode" class="btn bg-cyan" (click)="setEditMode()">
+      Guardar
+    </button>
+  </div>
+
   <div class="uk-grid-match" uk-grid>
     <div class="uk-width-1-2@m uk-width-1-3@l">
       <div class="uk-card uk-card-body">
-        <h3 class="mb-4" contenteditable="true">
+        <h3 class="mb-4" [attr.contenteditable]="editMode">
           {{ contenido.seccionQuienesSomos.title }}
         </h3>
-        <p contenteditable="true">
+        <p [attr.contenteditable]="editMode">
           {{ contenido.seccionQuienesSomos.content }}
         </p>
       </div>
@@ -17,20 +26,32 @@
       <div class="uk-child-width-1-1@m uk-child-width-1-2@l" uk-grid>
         <div>
           <div class="uk-card uk-card-default uk-card-body">
-            <h3>{{ contenido.seccionNuestraHistoria.title }}</h3>
-            <p>{{ contenido.seccionNuestraHistoria.content }}</p>
+            <h3 [attr.contenteditable]="editMode">
+              {{ contenido.seccionNuestraHistoria.title }}
+            </h3>
+            <p [attr.contenteditable]="editMode">
+              {{ contenido.seccionNuestraHistoria.content }}
+            </p>
           </div>
         </div>
         <div class="change-order">
           <div class="uk-card uk-card-default uk-card-body">
-            <h3>{{ contenido.seccionMisionVision.title }}</h3>
-            <p>{{ contenido.seccionMisionVision.content }}</p>
+            <h3 [attr.contenteditable]="editMode">
+              {{ contenido.seccionMisionVision.title }}
+            </h3>
+            <p [attr.contenteditable]="editMode">
+              {{ contenido.seccionMisionVision.content }}
+            </p>
           </div>
         </div>
         <div>
           <div class="uk-card uk-card-default uk-card-body">
-            <h3>{{ contenido.seccionAlianzas.title }}</h3>
-            <p>{{ contenido.seccionAlianzas.content }}</p>
+            <h3 [attr.contenteditable]="editMode">
+              {{ contenido.seccionAlianzas.title }}
+            </h3>
+            <p [attr.contenteditable]="editMode">
+              {{ contenido.seccionAlianzas.content }}
+            </p>
           </div>
         </div>
       </div>

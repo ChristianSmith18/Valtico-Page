@@ -12,6 +12,65 @@ body {
   background: linear-gradient(to bottom, #f8f8f8, #fff);
 }
 
+#modal-full {
+  z-index: 9999 !important;
+}
+
+[uk-dropdown] {
+  left: unset !important;
+  top: 36px !important;
+  right: 18px !important;
+  min-width: 100px;
+  padding: 0;
+  border-radius: 0.7rem;
+
+  &::before {
+    content: "\A";
+    position: absolute;
+    border-style: solid;
+    border-width: 10px 15px 10px 0;
+    border-color: transparent #fff transparent transparent !important;
+    top: -8px;
+    right: 0;
+  }
+
+  ul > li {
+    padding: 0 12px;
+    a {
+      color: #555;
+      transition: color ease-in-out 0.3s;
+
+      &:hover {
+        color: black !important;
+      }
+    }
+  }
+}
+
+img {
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: filter linear 0.3s;
+
+  &.disabled {
+    filter: grayscale(0.9) blur(1px) !important;
+  }
+}
+
+.uk-card {
+  border-radius: 0.3rem;
+}
+
+.uk-card-media-top {
+  max-height: 200px;
+
+  // img:nth-child(2) {
+  //   height: 100%;
+  //   width: auto;
+  // }
+}
+
 /*
  *  STYLE 1
  */

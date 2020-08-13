@@ -1,9 +1,5 @@
-.boxes {
-  min-height: 150px;
-}
-
-[uk-grid]>div {
-  transition: all ease-in-out .2s;
+[uk-grid] > div {
+  transition: all ease-in-out 0.2s;
 }
 
 .carousel-box {
@@ -16,7 +12,7 @@
     li {
       list-style: none;
       cursor: pointer;
-      transition: all ease-in-out .5s;
+      transition: all ease-in-out 0.5s;
 
       .bg-text {
         width: 100%;
@@ -33,20 +29,53 @@
       }
 
       &:hover {
-        background-color: lighten(rgba(34, 34, 34, .8), 15%);
+        background-color: lighten(rgba(34, 34, 34, 0.8), 15%);
       }
 
       &.index-active {
-        transition: all ease-in-out .5s;
+        transition: all ease-in-out 0.5s;
       }
 
       &.index-active:hover {
-        background-color: rgba(34, 34, 34, .8);
+        background-color: rgba(34, 34, 34, 0.8);
       }
     }
   }
 
   .index-active {
-    background-color: rgba(34, 34, 34, .8);
+    background-color: rgba(34, 34, 34, 0.8);
   }
+}
+
+.boxes {
+  position: relative;
+  min-height: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+
+  span.banner-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: white;
+    font-weight: bold;
+    background-color: rgba(4, 76, 164, 0.85);
+    width: 100%;
+    height: 20%;
+
+    // Para el que el text esté centrado
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.products-box {
+  background-image: url(https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80);
+}
+
+.services-box {
+  background-image: url(https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80);
 }

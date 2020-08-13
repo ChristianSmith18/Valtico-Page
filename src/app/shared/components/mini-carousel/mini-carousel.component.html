@@ -1,20 +1,51 @@
 <h3 class="uk-margin-remove-bottom">{{ title }}</h3>
 
-<div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1"
-  uk-slider="autoplay: true; autoplay-interval: 3500;" style="height: 190px">
+<div
+  class="uk-position-relative uk-visible-toggle uk-light"
+  tabindex="-1"
+  uk-slider="autoplay: true; autoplay-interval: 3500;"
+  style="height: 190px;"
+>
+  <ng-container *ngIf="productos">
+    <ul
+      class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m"
+      style="height: 100%;"
+    >
+      <li
+        *ngFor="let producto of productos; let i = index"
+        style="position: relative; cursor: pointer;"
+        (click)="clickOnBox(i)"
+      >
+        <img [src]="producto.imgPrimary" alt="" />
+        <!-- <div class="uk-panel"> -->
+        <span class="banner-text">{{ producto.title }}</span>
+        <!-- </div> -->
+      </li>
+    </ul>
+  </ng-container>
 
-  <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m" style="height: 100%;">
-    <li *ngFor="let item of [1,1,1,1,1]; let i = index;">
-      <img [src]="'https://getuikit.com/docs/images/slider'+(i+1)+'.jpg'" alt="">
-      <div class="uk-position-center uk-panel">
-        <h1>{{ i + 1 }}</h1>
-      </div>
-    </li>
-  </ul>
+  <ng-container *ngIf="servicios">
+    <ul
+      class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m"
+      style="height: 100%;"
+    >
+      <li *ngFor="let servicio of servicios; let i = index">
+        <img [src]="servicio.imgPrimary" alt="" />
+        <span class="banner-text">{{ servicio.title }}</span>
+      </li>
+    </ul>
+  </ng-container>
 
-  <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
-    uk-slider-item="previous"></a>
-  <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
-    uk-slider-item="next"></a>
-
+  <a
+    class="uk-position-center-left uk-position-small uk-hidden-hover"
+    href="#"
+    uk-slidenav-previous
+    uk-slider-item="previous"
+  ></a>
+  <a
+    class="uk-position-center-right uk-position-small uk-hidden-hover"
+    href="#"
+    uk-slidenav-next
+    uk-slider-item="next"
+  ></a>
 </div>

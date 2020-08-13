@@ -1,1 +1,104 @@
-<p>servicios works!</p>
+<fab-button (click)="openModal()"></fab-button>
+
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="large"
+  color="#fff"
+  type="square-jelly-box"
+  [fullScreen]="true"
+  [zIndex]="99999999"
+>
+  <p style="color: white;">Cargando...</p>
+</ngx-spinner>
+
+<div
+  class="uk-child-width-1-1@xs uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@xl uk-text-center"
+  uk-grid
+>
+  <div *ngFor="let servicio of servicios; let i = index">
+    <app-element-box
+      type="servicio"
+      [title]="servicio.title"
+      [imgStatic]="servicio.imgPrimary"
+      [imgHover]="servicio.imgSecondary"
+      [isAdmin]="true"
+      [enabled]="servicio.enabled"
+      (click)="clickOnBox(i)"
+      (dropdownClick)="dropdownClick($event, servicio, i)"
+    ></app-element-box>
+  </div>
+</div>
+
+<div id="modal-full" class="uk-modal-full" uk-modal>
+  <div class="uk-modal-dialog">
+    <button
+      id="close-button"
+      class="uk-modal-close-full uk-close-large"
+      type="button"
+      uk-close
+    ></button>
+    <div
+      class="uk-grid-collapse uk-child-width-1-1@s"
+      uk-grid
+      uk-height-viewport
+    >
+      <div class="uk-padding-large" style="max-width: 650px; margin: auto;">
+        <h1 class="uk-text-center mb-4">
+          {{ editMode ? "Editar Servicio" : "Crear Servicio" }}
+        </h1>
+        <div class="form-group mb-4">
+          <label for="exampleFormControlTitle1">Título del Servicio</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlTitle1"
+            [(ngModel)]="titleProduct"
+          />
+        </div>
+        <div class="custom-file mb-4">
+          <input
+            type="file"
+            class="custom-file-input"
+            id="customFile"
+            accept="image/gif, image/jpeg, image/png"
+            (change)="onUploadChange($event, true)"
+          />
+          <label class="custom-file-label" for="customFile">
+            Suba la imagen primaria
+          </label>
+        </div>
+        <div class="custom-file mb-2">
+          <input
+            type="file"
+            class="custom-file-input"
+            id="customFile"
+            accept="image/gif, image/jpeg, image/png"
+            (change)="onUploadChange($event, false)"
+          />
+          <label class="custom-file-label" for="customFile">
+            Suba la imagen secundaria
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Descripción detallada</label>
+          <textarea
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="5"
+            [(ngModel)]="largeDescription"
+          ></textarea>
+        </div>
+        <div class="form-group text-center">
+          <button
+            id="send-data"
+            type="button"
+            class="btn btn-primary mt-2 px-4"
+            (click)="createProducto()"
+          >
+            {{ editMode ? "Actualizar Servicio" : "Crear Servicio" }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
