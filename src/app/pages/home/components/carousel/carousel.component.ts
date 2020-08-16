@@ -11,11 +11,8 @@ export class CarouselComponent {
     animation: 'fade',
     'max-height': 320,
   };
-  public slides: SlideItem[];
-
-  constructor(private _carousel: CarouselService) {
-    this.slides = this._carousel.getSlides;
-  }
+  @Input() slides: SlideItem[];
+  @Input() skeleton = false;
 
   get getOptions() {
     let options = '';

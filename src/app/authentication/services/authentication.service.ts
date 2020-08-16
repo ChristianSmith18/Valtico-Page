@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '@src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +34,7 @@ export class AuthenticationService {
     const headers = new HttpHeaders().append('admin', admin);
 
     return this.http.get<{ ok: boolean; token: string }>(
-      `http://localhost:3000/login`,
+      `${environment.apiUrl}/login`,
       { headers }
     );
   }

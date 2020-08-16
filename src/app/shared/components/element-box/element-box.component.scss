@@ -5,10 +5,14 @@
 .card-title-container {
   padding: 10px;
 
-  h3 {
+  h3.uk-card-title {
     margin: 0;
     font-size: 1.8rem;
   }
+}
+
+h3.h3-subtitle {
+  font-size: 1.2rem;
 }
 
 .uk-icon-button {
@@ -24,4 +28,9 @@
     color: rgba(white, 0.8);
     background: rgba(black, 0.2);
   }
+}
+
+.min-height-fix {
+  width: auto;
+  min-height: 200px;
 }

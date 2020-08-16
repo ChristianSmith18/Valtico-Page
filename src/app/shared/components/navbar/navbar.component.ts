@@ -14,6 +14,7 @@ export interface NavbarRoutes {
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  public findText: string = null;
   public navbarRoutes: NavbarRoutes[] = [
     { name: 'home', route: 'home', icon: 'fas fa-home' },
     { name: 'productos', route: 'products', icon: 'fas fa-store' },
@@ -37,5 +38,17 @@ export class NavbarComponent implements OnInit {
   closeMenu() {
     const menu = document.getElementById('offcanvas');
     UIkit.offcanvas(menu).hide();
+  }
+
+  compareText(text: string): boolean {
+    if (text.indexOf(this.findText) === -1) {
+      return false;
+    }
+    return true;
+  }
+
+  clickItem() {
+    this.findText = null;
+    document.getElementById('element').click();
   }
 }

@@ -64,4 +64,10 @@ export class ProductosService {
       }
     );
   }
+
+  public getTwoProductos() {
+    return this.http.get<ResponseProductos>(
+      `${environment.apiUrl}/productos/two`
+    );
+  }
 }

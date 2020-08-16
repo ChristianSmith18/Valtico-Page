@@ -20,10 +20,85 @@
         <i class="fab fa-youtube"></i>
       </a>
     </li>
-    <li uk-scrollspy="cls: uk-animation-slide-right-medium; delay: 800">
-      <a href="#">
+    <li
+      uk-scrollspy="cls: uk-animation-slide-right-medium; delay: 800"
+      uk-toggle="target: #modal-contacto"
+    >
+      <a>
         <i class="fas fa-envelope"></i>
       </a>
     </li>
   </ul>
+</div>
+
+<div id="modal-contacto" class="uk-flex-top" uk-modal>
+  <div
+    class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical"
+    style="border-radius: 0.4rem;"
+  >
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title">
+        Contácto
+      </h2>
+    </div>
+
+    <div class="uk-modal-body">
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-stacked-name">
+          Nombre
+        </label>
+        <div class="uk-form-controls">
+          <input
+            class="uk-input"
+            id="form-stacked-name"
+            type="text"
+            placeholder="Ingrese su nombre..."
+            [(ngModel)]="nameInput"
+          />
+        </div>
+      </div>
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-stacked-mail">
+          Correo Electrónico
+        </label>
+        <div class="uk-form-controls">
+          <input
+            class="uk-input"
+            id="form-stacked-mail"
+            type="mail"
+            placeholder="Ingrese su correo de contacto..."
+            [(ngModel)]="emailInput"
+          />
+        </div>
+      </div>
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-stacked-msg">
+          Mensaje
+        </label>
+        <div class="uk-form-controls">
+          <textarea
+            name=""
+            id="form-stacked-msg"
+            class="uk-textarea"
+            rows="5"
+            placeholder="Ingrese su mensaje..."
+            style="resize: none;"
+            [(ngModel)]="messageInput"
+          ></textarea>
+        </div>
+        <div class="uk-text-center uk-margin-medium-top">
+          <button
+            class="btn btn-primary"
+            (click)="sendEmail()"
+            style="min-width: 150px; min-height: 50px;"
+          >
+            <span *ngIf="!loader">Enviar</span>
+            <div *ngIf="loader" uk-spinner></div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,11 +1,3 @@
 .uk-section {
   padding: 0;
-
-  .change-order {
-    order: 5;
-
-    @media screen and (max-width: 1199px) {
-      order: unset;
-    }
-  }
 }

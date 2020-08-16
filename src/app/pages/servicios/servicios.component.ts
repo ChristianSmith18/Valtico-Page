@@ -1,3 +1,5 @@
+import { ServiciosService } from '@shared/services/servicios.service';
+import { Servicio } from './../../shared/models/servicio.interface';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,8 +9,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./servicios.component.scss'],
 })
 export class ServiciosComponent implements OnInit {
-  public services = new Array(5);
-  constructor() {}
+  public servicios: Servicio[];
+  public currentIndex: number = null;
+
+  constructor(private _servicios: ServiciosService) {
+    this._servicios
+      .getAllServiciosWithFilter()
+      .subscribe(({ ok, servicios }) => {
+        if (ok) {
+          this.servicios = servicios;
+        }
+      });
+  }
 
   ngOnInit(): void {}
+
+  clickOnBox(index: number) {
+    this.currentIndex = index;
+  }
 }

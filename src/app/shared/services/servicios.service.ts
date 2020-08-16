@@ -64,4 +64,10 @@ export class ServiciosService {
       }
     );
   }
+
+  public getTwoServicios() {
+    return this.http.get<ResponseServicios>(
+      `${environment.apiUrl}/servicios/two`
+    );
+  }
 }

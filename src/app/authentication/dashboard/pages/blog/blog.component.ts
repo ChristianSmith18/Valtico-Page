@@ -75,6 +75,7 @@ export class BlogComponent implements OnInit, OnDestroy {
 
   onUploadChange(evt: any, portada: boolean) {
     const file = evt.target.files[0] || null;
+    const filename = file.name;
 
     if (file) {
       if (
@@ -95,11 +96,18 @@ export class BlogComponent implements OnInit, OnDestroy {
             const base64data = reader.result.toString();
             if (portada) {
               this.base64textStringPortada = base64data;
+              (document.getElementById(
+                'l-img-p'
+              ) as HTMLLabelElement).innerText = this.textFormat(filename);
+
               (document.querySelector(
                 '#exampleFormControlDescription1'
               ) as HTMLInputElement).select();
             } else {
               this.base64textStringContenido = base64data;
+              (document.getElementById(
+                'l-img-b'
+              ) as HTMLLabelElement).innerText = this.textFormat(filename);
             }
           };
         },
@@ -107,6 +115,13 @@ export class BlogComponent implements OnInit, OnDestroy {
     } else {
       (evt.target as HTMLInputElement).value = '';
     }
+  }
+
+  textFormat(text: string): string {
+    if (text.length < 30) {
+      return text;
+    }
+    return text.substring(0, 30).trim() + '...';
   }
 
   inner(event: HTMLDivElement) {

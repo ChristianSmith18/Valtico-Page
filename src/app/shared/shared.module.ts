@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 // Extern modules
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
@@ -28,7 +29,7 @@ const globalComponents = [
 
 @NgModule({
   declarations: [...globalComponents],
-  imports: [CommonModule, RouterModule, NgxSkeletonLoaderModule],
+  imports: [CommonModule, FormsModule, RouterModule, NgxSkeletonLoaderModule],
   exports: [...globalComponents],
 })
 export class SharedModule {}

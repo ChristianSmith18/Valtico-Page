@@ -8,6 +8,7 @@ import { SharedModule } from '@shared/shared.module';
 
 // Extern Modules
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 // Components
 import { HomeComponent } from './home/home.component';
@@ -45,6 +46,7 @@ import { SingleEventoComponent } from './single-evento/single-evento.component';
     SharedModule,
     PagesRoutingModule,
     NgxSpinnerModule,
+    NgxSkeletonLoaderModule,
   ],
 })
 export class PagesModule {}

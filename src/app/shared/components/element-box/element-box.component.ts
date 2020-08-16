@@ -15,6 +15,7 @@ export class ElementBoxComponent implements OnInit {
   @Input() imgHover = 'https://getuikit.com/docs/images/light.jpg';
   @Input() isAdmin = false;
   @Input() enabled = true;
+  @Input() skeleton = false;
 
   @Output() dropdownClick = new EventEmitter<
     'Editar' | 'Habilitar' | 'Deshabilitar'

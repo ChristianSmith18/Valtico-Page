@@ -1,29 +1,42 @@
 <footer class="uk-section">
   <div class="uk-container">
-
-    <div class="uk-grid-match uk-child-width-1-1@xs uk-child-width-1-2@s uk-child-width-1-4@m" uk-grid>
+    <div
+      *ngIf="boxContent"
+      class="uk-grid-match uk-child-width-1-1@xs uk-child-width-1-2@s uk-child-width-1-4@m"
+      uk-grid
+    >
       <div>
-        <h3>Dirección</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+        <h3>{{ boxContent[0].title }}</h3>
+        <p>{{ boxContent[0].description }}</p>
       </div>
       <div>
-        <h3>Oficina Central</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+        <h3>{{ boxContent[1].title }}</h3>
+        <p>{{ boxContent[1].description }}</p>
       </div>
       <div>
-        <h3>Oficina Comercial</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+        <h3>{{ boxContent[2].title }}</h3>
+        <p>{{ boxContent[2].description }}</p>
       </div>
       <div>
-        <h3>Oficina Obras Civiles</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+        <h3>{{ boxContent[3].title }}</h3>
+        <p>{{ boxContent[3].description }}</p>
       </div>
     </div>
 
-    <div class="uk-text-center dev-section" style="height: 0; margin-top: 30px;">
-      Developed by <span class="author" (click)="redirectTo('https://cristian-gonzalez.com/')">Cristian
-        González</span><span class="powered">, Powered by <span class="framework"
-          (click)="redirectTo('https://angular.io/')">Angular&nbsp;<i class="fab fa-angular"></i></span></span>
+    <div
+      class="uk-text-center dev-section"
+      style="height: 0; margin-top: 30px;"
+    >
+      Developed by
+      <span
+        class="author"
+        (click)="redirectTo('https://cristian-gonzalez.com/')"
+        >Cristian González</span
+      ><span class="powered"
+        >, Powered by
+        <span class="framework" (click)="redirectTo('https://angular.io/')"
+          >Angular&nbsp;<i class="fab fa-angular"></i></span
+      ></span>
     </div>
   </div>
 </footer>

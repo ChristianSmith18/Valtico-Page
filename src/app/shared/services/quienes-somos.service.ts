@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TokenService } from './token.service';
 import { QuienesSomos } from '../models/quienes-somos.interface';
-import { environment } from './../../../environments/environment';
+import { environment } from '@src/environments/environment';
 
 interface ResponseQuienesSomos {
   ok: boolean;

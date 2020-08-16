@@ -28,10 +28,10 @@
     class="uk-card-media-top uk-inline-clip uk-transition-toggle"
     tabindex="0"
   >
-    <a *ngIf="!isAdmin" href="#modal-full" uk-toggle>
-      <img [src]="imgStatic" alt="" />
+    <a *ngIf="!isAdmin" class="overflow-hidden" href="#modal-full" uk-toggle>
+      <img [src]="imgStatic" class="min-height-fix" alt="" />
       <img
-        class="uk-transition-scale-up uk-position-cover"
+        class="uk-transition-scale-up uk-position-cover min-height-fix"
         [src]="imgHover"
         alt=""
       />
@@ -39,14 +39,19 @@
         *ngIf="!getType"
         class="uk-overlay uk-overlay-primary uk-position-bottom uk-padding-small"
       >
-        <h3 class="uk-margin-remove" style="font-size: 1.4rem;">{{ title }}</h3>
+        <h3 class="h3-subtitle uk-margin-remove">{{ title }}</h3>
       </div>
     </a>
-    <a *ngIf="isAdmin">
-      <img [ngClass]="{ disabled: !enabled }" [src]="imgStatic" alt="" />
+    <a *ngIf="isAdmin" class="overflow-hidden h-100">
       <img
         [ngClass]="{ disabled: !enabled }"
-        class="uk-transition-scale-up uk-position-cover"
+        [src]="imgStatic"
+        class="min-height-fix"
+        alt=""
+      />
+      <img
+        [ngClass]="{ disabled: !enabled }"
+        class="uk-transition-scale-up uk-position-cover min-height-fix"
         [src]="imgHover"
         alt=""
       />
@@ -54,7 +59,7 @@
         *ngIf="!getType"
         class="uk-overlay uk-overlay-primary uk-position-bottom uk-padding-small"
       >
-        <h3 class="uk-margin-remove" style="font-size: 1.4rem;">{{ title }}</h3>
+        <h3 class="h3-subtitle uk-margin-remove">{{ title }}</h3>
       </div>
     </a>
   </div>

@@ -1,31 +1,16 @@
-<div class="uk-text-center uk-grid-match" uk-grid>
+<div
+  class="uk-text-center uk-grid-match uk-padding-large uk-padding-remove-top"
+  uk-grid
+>
   <div class="uk-width-1-1@m">
     <div class="uk-grid-match" uk-grid>
-      <div class="uk-width-expand">
+      <div class="uk-width-expand rounded-top">
         <app-carousel
           [carouselControllers]="false"
           [options]="options"
+          [slides]="slides"
+          [skeleton]="!loader"
         ></app-carousel>
-      </div>
-      <div class="uk-width-1-3 uk-visible@m uk-padding-remove-left">
-        <div
-          class="uk-card uk-card-default uk-card-body carousel-box uk-padding-remove"
-          style="background-color: #8bcdcd;"
-        >
-          <ul class="uk-padding-remove">
-            <li
-              *ngFor="let slide of slides; let i = index; let total = count"
-              [ngClass]="{ 'index-active': i === indexSlideActive }"
-              [style.height]="setHeight(total)"
-              (click)="setIndex(i)"
-            >
-              <div class="bg-text">
-                <h3 class="uk-margin-remove">{{ slide.title }}</h3>
-                <p class="uk-margin-remove">{{ slide.description }}</p>
-              </div>
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
   </div>
@@ -34,7 +19,7 @@
       routerLink="/products"
       class="uk-card uk-card-default uk-card-body boxes products-box"
     >
-      <span class="banner-text">Productos</span>
+      <span class="banner-text rounded-bottom">Productos</span>
     </div>
   </div>
   <div class="uk-width-1-2@m">
@@ -42,7 +27,7 @@
       routerLink="/services"
       class="uk-card uk-card-default uk-card-body boxes services-box"
     >
-      <span class="banner-text">Servicios</span>
+      <span class="banner-text rounded-bottom">Servicios</span>
     </div>
   </div>
 </div>
