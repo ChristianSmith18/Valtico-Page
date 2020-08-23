@@ -5,6 +5,7 @@ import { Blog } from '@shared/models/blog.interface';
 import { SwalService } from '@shared/services/swal.service';
 import UIkit from 'uikit';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DomSanitizerService } from '@shared/services/dom-sanitizer.service';
 
 import Compressor from 'compressorjs';
 
@@ -29,7 +30,8 @@ export class BlogComponent implements OnInit, OnDestroy {
   constructor(
     private _blog: BlogService,
     private spinner: NgxSpinnerService,
-    private _swal: SwalService
+    private _swal: SwalService,
+    private _domSanitizer: DomSanitizerService
   ) {}
 
   ngOnInit(): void {
@@ -71,6 +73,10 @@ export class BlogComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.blogSubscription.unsubscribe();
+  }
+
+  private applyDOMSanitizer(html: string) {
+    return this._domSanitizer.applyDOMSanitizer(html);
   }
 
   onUploadChange(evt: any, portada: boolean) {
@@ -125,7 +131,7 @@ export class BlogComponent implements OnInit, OnDestroy {
   }
 
   inner(event: HTMLDivElement) {
-    this.content = event.innerHTML;
+    this.content = this.applyDOMSanitizer(event.innerHTML);
   }
 
   createBlog() {

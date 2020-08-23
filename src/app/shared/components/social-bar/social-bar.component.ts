@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { EmailService } from './../../services/email.service';
+import { Component } from '@angular/core';
 import { Email } from './../../models/email.interface';
+import { EmailService } from './../../services/email.service';
 import { SwalService } from './../../services/swal.service';
+import { HomeService, SocialNetwork } from '@shared/services/home.service';
 import UIkit from 'uikit';
 
 @Component({
@@ -9,15 +10,18 @@ import UIkit from 'uikit';
   templateUrl: './social-bar.component.html',
   styleUrls: ['./social-bar.component.scss'],
 })
-export class SocialBarComponent implements OnInit {
+export class SocialBarComponent {
   public nameInput: string = null;
   public emailInput: string = null;
   public messageInput: string = null;
+  public allData: SocialNetwork[];
   public loader = false;
 
-  constructor(private _email: EmailService, private _swal: SwalService) {}
-
-  ngOnInit(): void {}
+  constructor(private _email: EmailService, private _swal: SwalService, private _home: HomeService) {
+    this._home.getSocialNetworks().subscribe((data: any) => {
+      this.allData = data.data as SocialNetwork[];
+    });
+  }
 
   sendEmail() {
     this.loader = true;

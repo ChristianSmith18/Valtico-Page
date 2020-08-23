@@ -1,6 +1,7 @@
+import { DomSanitizerService } from './../../shared/services/dom-sanitizer.service';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BlogService } from '@shared/services/blog.service';
-import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -19,7 +20,8 @@ export class SingleBlogComponent implements OnInit {
   constructor(
     private _blog: BlogService,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private _domSanitizer: DomSanitizerService
   ) {
     this._blog.getOneBlog(window.location.pathname.split('/')[2]).subscribe(
       ({ blog }) => {
@@ -31,7 +33,7 @@ export class SingleBlogComponent implements OnInit {
         this.imgBanner = blog.complete.imgTop;
 
         document.querySelector('#editor-container').innerHTML =
-          blog.complete.article;
+          this._domSanitizer.applyDOMSanitizer(blog.complete.article) + '';
         this.showBgData = false;
         this.spinner.hide();
       },

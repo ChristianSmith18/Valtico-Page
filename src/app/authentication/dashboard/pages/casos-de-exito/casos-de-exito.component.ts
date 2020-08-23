@@ -38,7 +38,6 @@ export class CasosDeExitoComponent implements OnInit {
     document.querySelector('#close-button').addEventListener('click', () => {
       if (this.editMode) {
         setTimeout(() => {
-          this.editMode = false;
           this.clearFields();
         }, 500);
       }
@@ -74,10 +73,6 @@ export class CasosDeExitoComponent implements OnInit {
         this.base64textStringSecondary = this.casosDeExito[index].imgSecondary;
         this.largeDescription = this.casosDeExito[index].largeDescription;
 
-        // document.querySelector('#editor > .ql-editor').innerHTML = this.blogs[
-        //   index
-        // ].complete.article;
-
         UIkit.modal(document.querySelector('#modal-full')).show();
         break;
     }
@@ -85,6 +80,7 @@ export class CasosDeExitoComponent implements OnInit {
 
   onUploadChange(evt: any, primary: boolean) {
     const file = evt.target.files[0] || null;
+    const filename = file?.name;
 
     if (file) {
       if (
@@ -106,10 +102,27 @@ export class CasosDeExitoComponent implements OnInit {
             if (primary) {
               this.base64textStringPrimary = base64data;
               (document.querySelector(
-                '#exampleFormControlDescription1'
+                '#customFile2'
               ) as HTMLInputElement).select();
+
+              document.querySelectorAll(
+                'label.custom-file-label'
+              )[0].innerHTML =
+                (filename as string).length < 30
+                  ? (filename as string)
+                  : (filename as string).substring(0, 30) + '...';
             } else {
               this.base64textStringSecondary = base64data;
+
+              (document.querySelector(
+                '#exampleFormControlTextarea1'
+              ) as HTMLInputElement).select();
+              document.querySelectorAll(
+                'label.custom-file-label'
+              )[1].innerHTML =
+                (filename as string).length < 30
+                  ? (filename as string)
+                  : (filename as string).substring(0, 30) + '...';
             }
           };
         },
@@ -124,6 +137,7 @@ export class CasosDeExitoComponent implements OnInit {
   }
 
   createProducto() {
+    this.spinner.show();
     const tempProducto: CasoDeExito = {
       title: this.title,
       imgPrimary: this.base64textStringPrimary,
@@ -139,19 +153,21 @@ export class CasosDeExitoComponent implements OnInit {
           this.casosDeExito[this.currentIndex].id,
           tempProducto
         )
-        .subscribe(() => {
-          this.editMode = false;
-          this.clearFields();
-          UIkit.modal(document.querySelector('#modal-full')).hide();
+        .subscribe(({ ok }) => {
+          if (ok) {
+            const id = this.casosDeExito[this.currentIndex].id;
+            this.casosDeExito[this.currentIndex] = tempProducto;
+            this.clearFields();
+          }
         });
     } else {
       this._casosDeExito
         .createCasoDeExito(tempProducto)
-        .subscribe(({ casoDeExito }) => {
-          this.casosDeExito.unshift(casoDeExito);
-          this.editMode = false;
-          this.clearFields();
-          UIkit.modal(document.querySelector('#modal-full')).hide();
+        .subscribe(({ casoDeExito, ok }) => {
+          if (ok) {
+            this.casosDeExito.unshift(casoDeExito);
+            this.clearFields();
+          }
         });
     }
   }
@@ -162,5 +178,8 @@ export class CasosDeExitoComponent implements OnInit {
     this.base64textStringSecondary = null;
     this.largeDescription = null;
     this.editMode = false;
+
+    UIkit.modal(document.querySelector('#modal-full')).hide();
+    this.spinner.hide();
   }
 }

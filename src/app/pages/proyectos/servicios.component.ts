@@ -1,6 +1,6 @@
-import { ServiciosService } from '@shared/services/servicios.service';
-import { Servicio } from './../../shared/models/servicio.interface';
 import { Component, OnInit } from '@angular/core';
+import { Servicio } from '@shared/models/servicio.interface';
+import { ServiciosService } from '@shared/services/servicios.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class ServiciosComponent implements OnInit {
   public servicios: Servicio[];
   public currentIndex: number = null;
+  public loader = false;
 
   constructor(private _servicios: ServiciosService) {
     this._servicios
@@ -19,6 +20,7 @@ export class ServiciosComponent implements OnInit {
         if (ok) {
           this.servicios = servicios;
         }
+        this.loader = true;
       });
   }
 

@@ -1,23 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { QuienesSomosService } from '@shared/services/quienes-somos.service';
 import { QuienesSomos } from '@shared/models/quienes-somos.interface';
+import { DomSanitizerService } from '@shared/services/dom-sanitizer.service';
 
 @Component({
   selector: 'app-quienes-somos',
   templateUrl: './quienes-somos.component.html',
   styleUrls: ['./quienes-somos.component.scss'],
 })
-export class QuienesSomosComponent implements OnInit {
+export class QuienesSomosComponent {
   public contenido: QuienesSomos;
   public editMode = false;
 
-  constructor(private _quienesSomos: QuienesSomosService) {
+  constructor(
+    private _quienesSomos: QuienesSomosService,
+    private _domSanitizer: DomSanitizerService
+  ) {
     this._quienesSomos.getData().subscribe((contenido) => {
       this.contenido = contenido;
     });
   }
-
-  ngOnInit(): void {}
 
   setEditMode() {
     if (this.editMode) {
@@ -67,5 +69,9 @@ export class QuienesSomosComponent implements OnInit {
     } else {
       this.editMode = true;
     }
+  }
+
+  public applyDOMSanitizer(html: string) {
+    return this._domSanitizer.applyDOMSanitizer(html);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import UIkit from 'uikit';
 
 @Component({
@@ -6,8 +6,7 @@ import UIkit from 'uikit';
   templateUrl: './element-box.component.html',
   styleUrls: ['./element-box.component.scss'],
 })
-export class ElementBoxComponent implements OnInit {
-  @Input() type: 'servicio' | 'producto' | 'caso de exito' = 'producto';
+export class ElementBoxComponent {
   @Input() title = 'Sin título';
   @Input() description =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.';
@@ -22,15 +21,6 @@ export class ElementBoxComponent implements OnInit {
   >();
 
   constructor() {}
-
-  ngOnInit(): void {}
-
-  get getType(): boolean {
-    if (this.type === 'producto') {
-      return true;
-    }
-    return false;
-  }
 
   dropdownEvent(event: 'Editar' | 'Habilitar' | 'Deshabilitar') {
     document.querySelectorAll('.my-dropdown').forEach((tag) => {

@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import UIkit from 'uikit';
 @Component({
   selector: 'app-element-post',
   templateUrl: './element-post.component.html',
   styleUrls: ['./element-post.component.scss'],
 })
-export class ElementPostComponent implements OnInit {
+export class ElementPostComponent {
   @Input() tag = 'Blogs';
   @Input() frontImg =
     'https://www.sspc.org/wp-content/uploads/2019/05/no-image.png';
@@ -25,8 +25,6 @@ export class ElementPostComponent implements OnInit {
   >();
 
   constructor() {}
-
-  ngOnInit(): void {}
 
   dropdownEvent(event: 'Editar' | 'Habilitar' | 'Deshabilitar') {
     document.querySelectorAll('.my-dropdown').forEach((tag) => {

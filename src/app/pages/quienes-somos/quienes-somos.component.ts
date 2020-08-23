@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { QuienesSomos } from '@src/app/shared/models/quienes-somos.interface';
-import { QuienesSomosService } from '@src/app/shared/services/quienes-somos.service';
+import { QuienesSomos } from '@shared/models/quienes-somos.interface';
+import { QuienesSomosService } from '@shared/services/quienes-somos.service';
+import { DomSanitizerService } from '@shared/services/dom-sanitizer.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -11,11 +12,18 @@ import { QuienesSomosService } from '@src/app/shared/services/quienes-somos.serv
 export class QuienesSomosComponent implements OnInit {
   public contenido: QuienesSomos;
 
-  constructor(private _quienesSomos: QuienesSomosService) {
+  constructor(
+    private _quienesSomos: QuienesSomosService,
+    private _domSanitizer: DomSanitizerService
+  ) {
     this._quienesSomos.getData().subscribe((contenido) => {
       this.contenido = contenido;
     });
   }
 
   ngOnInit(): void {}
+
+  public applyDOMSanitizer(html: string) {
+    return this._domSanitizer.applyDOMSanitizer(html);
+  }
 }

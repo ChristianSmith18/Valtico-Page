@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ClientesService } from '@shared/services/clientes.service';
 import { Cliente } from '@shared/models/cliente.interface';
 
@@ -9,7 +9,7 @@ import Compressor from 'compressorjs';
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.scss'],
 })
-export class ClientesComponent implements OnInit {
+export class ClientesComponent {
   public clients: Cliente[] = [];
   public currentIndex: number = null;
   public currenImg: string = null;
@@ -20,8 +20,6 @@ export class ClientesComponent implements OnInit {
       this.clients = clientes;
     });
   }
-
-  ngOnInit(): void {}
 
   changeImg(index: number) {
     if (
@@ -119,9 +117,6 @@ export class ClientesComponent implements OnInit {
       });
 
       this.currentIndex = this.clients.length - 1;
-      // this.currenImg = document.querySelectorAll('img')[
-      //   this.currentIndex + 1
-      // ].src;
       setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 100);
     }
   }
@@ -139,8 +134,9 @@ export class ClientesComponent implements OnInit {
     });
     newCliente.base64Img = this.currenImg;
     this._clientes.createCliente(this.clients[index]).subscribe(
-      ({ ok }) => {
+      ({ ok, cliente }) => {
         if (ok) {
+          this.clients[index].id = cliente.id;
           this.currenAdd = null;
           this.currentIndex = null;
           this.currenImg = null;

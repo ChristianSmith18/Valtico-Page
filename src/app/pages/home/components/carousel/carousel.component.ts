@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CarouselService, SlideItem } from '../../services/carousel.service';
+import { SlideItem } from '../../carousel-item.interface';
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',

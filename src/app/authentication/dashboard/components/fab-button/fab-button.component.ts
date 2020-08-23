@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -6,8 +6,4 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './fab-button.component.html',
   styleUrls: ['./fab-button.component.scss'],
 })
-export class FabButtonComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class FabButtonComponent {}

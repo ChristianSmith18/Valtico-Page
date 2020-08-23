@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { SwalService } from '@shared/services/swal.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   public email: string;
   public password: string;
 
@@ -23,8 +23,6 @@ export class LoginComponent implements OnInit {
   ) {
     this.title.setTitle('Valtico Login');
   }
-
-  ngOnInit(): void {}
 
   signIn(): void {
     this.spinner.show();

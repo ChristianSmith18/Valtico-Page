@@ -20,10 +20,6 @@
     </ul>
   </div>
 
-  <div *ngIf="getType" class="card-title-container">
-    <h3 class="uk-card-title">{{ title }}</h3>
-  </div>
-
   <div
     class="uk-card-media-top uk-inline-clip uk-transition-toggle"
     tabindex="0"
@@ -36,13 +32,13 @@
         alt=""
       />
       <div
-        *ngIf="!getType"
         class="uk-overlay uk-overlay-primary uk-position-bottom uk-padding-small"
       >
         <h3 class="h3-subtitle uk-margin-remove">{{ title }}</h3>
       </div>
     </a>
-    <a *ngIf="isAdmin" class="overflow-hidden h-100">
+
+    <a *ngIf="isAdmin" class="overflow-hidden">
       <img
         [ngClass]="{ disabled: !enabled }"
         [src]="imgStatic"
@@ -56,14 +52,10 @@
         alt=""
       />
       <div
-        *ngIf="!getType"
         class="uk-overlay uk-overlay-primary uk-position-bottom uk-padding-small"
       >
         <h3 class="h3-subtitle uk-margin-remove">{{ title }}</h3>
       </div>
     </a>
-  </div>
-  <div *ngIf="getType" class="uk-card-body">
-    <p>{{ description }}</p>
   </div>
 </div>

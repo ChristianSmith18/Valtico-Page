@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente } from './../../shared/models/cliente.interface';
-import { ClientesService } from '@src/app/shared/services/clientes.service';
+import { Cliente } from '@shared/models/cliente.interface';
+import { ClientesService } from '@shared/services/clientes.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -10,9 +10,12 @@ import { ClientesService } from '@src/app/shared/services/clientes.service';
 })
 export class ClientesComponent implements OnInit {
   public clients: Cliente[];
+  public loader = false;
+
   constructor(private _clientes: ClientesService) {
     this._clientes.getClientes(false).subscribe(({ clientes }) => {
       this.clients = clientes;
+      this.loader = true;
     });
   }
 

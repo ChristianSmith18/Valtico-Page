@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class CasosDeExitoComponent implements OnInit {
   public casosDeExito: CasoDeExito[];
   public currentIndex: number = null;
+  public loader = false;
 
   constructor(private _casosDeExito: CasosDeExitoService) {
     this._casosDeExito
@@ -18,6 +19,7 @@ export class CasosDeExitoComponent implements OnInit {
         if (ok) {
           this.casosDeExito = casosDeExito;
         }
+        this.loader = true;
       });
   }
 

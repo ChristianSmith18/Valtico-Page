@@ -1,12 +1,8 @@
-<div
-  class="uk-text-center uk-grid-match uk-padding-large uk-padding-remove-top"
-  uk-grid
->
+<div class="uk-text-center uk-grid-match" uk-grid>
   <div class="uk-width-1-1@m">
     <div class="uk-grid-match" uk-grid>
-      <div class="uk-width-expand rounded-top">
+      <div class="uk-width-expand">
         <app-carousel
-          [carouselControllers]="false"
           [options]="options"
           [slides]="slides"
           [skeleton]="!loader"
@@ -14,20 +10,10 @@
       </div>
     </div>
   </div>
-  <div class="uk-width-1-2@m">
-    <div
-      routerLink="/products"
-      class="uk-card uk-card-default uk-card-body boxes products-box"
-    >
-      <span class="banner-text rounded-bottom">Productos</span>
-    </div>
-  </div>
-  <div class="uk-width-1-2@m">
-    <div
-      routerLink="/services"
-      class="uk-card uk-card-default uk-card-body boxes services-box"
-    >
-      <span class="banner-text rounded-bottom">Servicios</span>
-    </div>
-  </div>
 </div>
+
+<ngx-spinner
+  bdColor="rgb(255,255,255)"
+  [fullScreen]="true"
+  [template]="template"
+></ngx-spinner>

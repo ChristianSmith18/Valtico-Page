@@ -1,27 +1,30 @@
-<div *ngIf="noData" class="no-data">
-  <h2>No hay blogs en este momento..</h2>
-</div>
+<div class="component-container">
+  <div *ngIf="noData" class="no-data">
+    <h2>No hay blogs en este momento..</h2>
+  </div>
 
-<div
-  class="uk-child-width-1-1@xs uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l uk-child-width-1-5@xl uk-margin-medium-bottom"
-  uk-grid
->
-  <ng-container *ngIf="loaded">
-    <div *ngFor="let blog of blogs; let i = index">
-      <app-element-post
-        [title]="blog.title"
-        [text]="blog.front.shortDescription"
-        [route]="transformRoute(blog.id)"
-        [frontImg]="blog.front.imgFront"
-        date="{{ blog.dateAt | displayTime }}"
-      >
-      </app-element-post>
-    </div>
-  </ng-container>
+  <div
+    *ngIf="!noData"
+    class="uk-child-width-1-1@xs uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l uk-child-width-1-5@xl uk-margin-medium-bottom"
+    uk-grid
+  >
+    <ng-container *ngIf="loaded">
+      <div *ngFor="let blog of blogs; let i = index">
+        <app-element-post
+          [title]="blog.title"
+          [text]="blog.front.shortDescription"
+          [route]="transformRoute(blog.id)"
+          [frontImg]="blog.front.imgFront"
+          date="{{ blog.dateAt | displayTime }}"
+        >
+        </app-element-post>
+      </div>
+    </ng-container>
 
-  <ng-container *ngIf="!loaded">
-    <div *ngFor="let item of [1, 1, 1, 1]; let i = index">
-      <app-element-post [skeleton]="true"></app-element-post>
-    </div>
-  </ng-container>
+    <ng-container *ngIf="!loaded">
+      <div *ngFor="let item of [1, 1, 1, 1]; let i = index">
+        <app-element-post [skeleton]="true"></app-element-post>
+      </div>
+    </ng-container>
+  </div>
 </div>

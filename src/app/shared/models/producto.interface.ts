@@ -1,17 +1,25 @@
-export class Producto {
+class Section {
   title: string;
+  content: string;
+}
 
-  imgPrimary: string;
+export class Producto {
+  seccionQueHacemos: Section;
 
-  imgSecondary: string;
+  seccionNuestraMetodologiaDeTrabajo: Section;
+  // title: string;
 
-  shortDescription: string;
+  // imgPrimary: string;
 
-  largeDescription: string;
+  // imgSecondary: string;
 
-  enabled: boolean;
+  // shortDescription: string;
 
-  id?: string;
+  // largeDescription: string;
 
-  dateAt?: Date;
+  // enabled: boolean;
+
+  // id?: string;
+
+  // dateAt?: Date;
 }

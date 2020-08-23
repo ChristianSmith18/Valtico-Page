@@ -1,29 +1,29 @@
-import { Footer } from './../../../../shared/models/footer.interface';
-import { Component, OnInit } from '@angular/core';
+import { DomSanitizerService } from '@shared/services/dom-sanitizer.service';
+import { Component } from '@angular/core';
 import { HomeService } from '@shared/services/home.service';
 import { FooterService } from '@shared/services/footer.service';
+import { Footer } from '@shared/models/footer.interface';
+import { SocialNetwork } from '@shared/services/home.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
-  public facebook: string = null;
-  public twitter: string = null;
-  public linkedin: string = null;
-  public youtube: string = null;
+export class HomeComponent {
+  public allData: SocialNetwork[];
 
   public boxContent: Footer[];
 
   public currentIndex = null;
 
-  constructor(private _home: HomeService, private _footer: FooterService) {
+  constructor(
+    private _home: HomeService,
+    private _footer: FooterService,
+    private _domSanitizer: DomSanitizerService
+  ) {
     this._home.getSocialNetworks().subscribe((data: any) => {
-      this.facebook = (data.data[0].url as string).trim();
-      this.twitter = (data.data[1].url as string).trim();
-      this.linkedin = (data.data[2].url as string).trim();
-      this.youtube = (data.data[3].url as string).trim();
+      this.allData = data.data as SocialNetwork[];
     });
 
     this._footer.getFooterElements().subscribe(({ data }) => {
@@ -31,9 +31,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  public updateSocialBar(index: number) {
+    this._home
+      .updateSocialNetworks(this.allData[index].id, this.allData[index])
+      .subscribe();
+  }
 
-  setCurrentIndex(index: number) {
+  public setCurrentIndex(index: number) {
     this.currentIndex = index;
     setTimeout(() => {
       this.selectElementContents(
@@ -42,7 +46,7 @@ export class HomeComponent implements OnInit {
     }, 0);
   }
 
-  selectElementContents(el) {
+  public selectElementContents(el) {
     const range = document.createRange();
     range.selectNodeContents(el);
     const sel = window.getSelection();
@@ -50,14 +54,14 @@ export class HomeComponent implements OnInit {
     sel.addRange(range);
   }
 
-  updateData(index: number) {
+  public updateData(index: number) {
     const newElementFooter: Footer = this.boxContent[index];
 
     newElementFooter.title = document
       .querySelectorAll('h3[contenteditable="true"]')[0]
       .innerHTML.trim();
     newElementFooter.description = document
-      .querySelectorAll('p[contenteditable="true"]')[0]
+      .querySelectorAll('div[contenteditable="true"]')[0]
       .innerHTML.trim();
 
     this._footer
@@ -67,5 +71,9 @@ export class HomeComponent implements OnInit {
           this.currentIndex = null;
         }
       });
+  }
+
+  public applyDOMSanitizer(html: string) {
+    return this._domSanitizer.applyDOMSanitizer(html);
   }
 }

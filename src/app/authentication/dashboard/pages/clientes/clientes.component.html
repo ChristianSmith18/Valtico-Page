@@ -3,7 +3,7 @@
 <ul style="background-color: #fff; padding: 10px 20px;" uk-accordion>
   <li
     class="position-relative"
-    *ngFor="let client of clients; let i = index"
+    *ngFor="let client of clients; let i = index; let isLast = last"
     [ngClass]="{ 'uk-open': i !== -1 }"
   >
     <div class="position-absolute" style="right: 0;">
@@ -78,12 +78,6 @@
         </div>
         <div class="uk-width-1-2@s uk-width-expand@m">
           <div class="uk-card-body">
-            <!-- <h3
-              class="uk-card-title"
-              [attr.contenteditable]="i === currentIndex"
-            >
-              {{ client.title }}
-            </h3> -->
             <p
               [attr.contenteditable]="
                 i === currentIndex || (i === currenAdd && currenAdd !== null)
@@ -95,7 +89,7 @@
         </div>
       </div>
     </div>
-    <hr *ngIf="clients.length > 1" class="uk-divider-icon" />
+    <hr *ngIf="!isLast" class="uk-divider-icon" />
   </li>
 </ul>
 

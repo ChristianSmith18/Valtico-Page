@@ -1,28 +1,22 @@
 <div class="component-container">
-  <div
-    *ngIf="(!casosDeExito || casosDeExito?.length === 0) && loader"
-    class="no-data"
-  >
-    <h2>No hay casos de éxito en este momento..</h2>
+  <div *ngIf="!servicios && loader" class="no-data">
+    <h2>No hay clientes en este momento..</h2>
   </div>
 
-  <h1 *ngIf="casosDeExito && casosDeExito?.length > 0" class="uk-dark">
-    Casos de Éxito
-  </h1>
+  <h3 *ngIf="servicios">Proyectos</h3>
+
   <div
-    *ngIf="casosDeExito && casosDeExito?.length > 0"
+    *ngIf="servicios"
     class="uk-child-width-1-1@xs uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@xl uk-text-center"
     uk-grid
   >
-    <div *ngFor="let casoDeExito of casosDeExito; let i = index">
+    <div *ngFor="let servicio of servicios; let i = index">
       <app-element-box
-        [title]="casoDeExito.title"
-        [imgStatic]="casoDeExito.imgPrimary"
-        [imgHover]="casoDeExito.imgSecondary"
-        [description]="casoDeExito.largeDescription"
+        [title]="servicio.title"
+        [imgStatic]="servicio.imgPrimary"
+        [imgHover]="servicio.imgSecondary"
         (click)="clickOnBox(i)"
-      >
-      </app-element-box>
+      ></app-element-box>
     </div>
   </div>
 
@@ -38,11 +32,18 @@
         uk-grid
         uk-height-viewport
       >
+        <div class="uk-width-1-1 uk-padding-large" style="height: 280px;">
+          <app-mini-carousel
+            title="Servicios"
+            [servicios]="servicios"
+            (clickOnBoxItem)="currentIndex = $event"
+          ></app-mini-carousel>
+        </div>
         <div class="uk-padding-large">
           <app-element-description
-            [title]="casosDeExito[currentIndex].title"
-            [content]="casosDeExito[currentIndex].largeDescription"
-            [img]="casosDeExito[currentIndex].imgSecondary"
+            [title]="servicios[currentIndex].title"
+            [content]="servicios[currentIndex].largeDescription"
+            [img]="servicios[currentIndex].imgSecondary"
           ></app-element-description>
         </div>
       </div>
@@ -50,7 +51,7 @@
   </div>
 
   <div
-    *ngIf="!casosDeExito"
+    *ngIf="!servicios"
     class="uk-child-width-1-1@xs uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@xl uk-text-center"
     uk-grid
   >

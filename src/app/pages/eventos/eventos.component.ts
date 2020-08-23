@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Evento } from '@src/app/shared/models/evento.interface';
-import { Subscription } from 'rxjs';
+import { Evento } from '@shared/models/evento.interface';
 import { EventosService } from './../../shared/services/eventos.service';
 
 @Component({
@@ -9,29 +8,22 @@ import { EventosService } from './../../shared/services/eventos.service';
   templateUrl: './eventos.component.html',
   styleUrls: ['./eventos.component.scss'],
 })
-export class EventosComponent implements OnInit, OnDestroy {
+export class EventosComponent implements OnInit {
   public eventos: Evento[];
   public loaded = false;
   public noData = false;
-  private blogSubscription: Subscription;
 
   constructor(private _eventos: EventosService) {}
 
   ngOnInit(): void {
-    this.blogSubscription = this._eventos
-      .getAllEventos(false)
-      .subscribe((response) => {
-        if (!response) {
-          this.noData = true;
-        } else {
-          this.eventos = response.events;
-        }
-        this.loaded = true;
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.blogSubscription.unsubscribe();
+    this._eventos.getAllEventos(false).subscribe((response) => {
+      if (!response) {
+        this.noData = true;
+      } else {
+        this.eventos = response.events;
+      }
+      this.loaded = true;
+    });
   }
 
   transformRoute(route: string): string {

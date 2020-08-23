@@ -21,11 +21,11 @@ h3.h3-subtitle {
   right: 0;
 
   background: transparent;
-  color: gray;
+  color: white;
   transition: all ease-in-out 0.1s;
 
   &:hover {
-    color: rgba(white, 0.8);
+    color: white;
     background: rgba(black, 0.2);
   }
 }

@@ -1,9 +1,9 @@
 a.uk-accordion-title {
-  transition: content ease-in-out .4s;
+  transition: content ease-in-out 0.4s;
 
   &::before {
     font-family: FontAwesome;
-    content: '\f105';
+    content: "\f105";
     background-image: none !important;
   }
 }
@@ -11,7 +11,12 @@ a.uk-accordion-title {
 .uk-open {
   a.uk-accordion-title::before {
     font-family: FontAwesome;
-    content: '\f107';
+    content: "\f107";
     background-image: none !important;
   }
+}
+
+ul {
+  background-color: #fff;
+  padding: 10px 20px;
 }

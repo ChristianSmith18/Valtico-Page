@@ -17,14 +17,14 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent, data: { title: 'home' } },
       {
-        path: 'products',
+        path: 'what-do-we-do',
         component: ProductosComponent,
-        data: { title: 'productos' },
+        data: { title: 'qué hacemos' },
       },
       {
-        path: 'services',
+        path: 'projects',
         component: ServiciosComponent,
-        data: { title: 'servicios' },
+        data: { title: 'proyectos' },
       },
       {
         path: 'about',

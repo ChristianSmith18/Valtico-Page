@@ -1,23 +1,18 @@
-<div class="uk-visible@m">
-  <!-- <p style="font-size: 2.8rem; margin: 0 0 0 10px;">Logo</p> -->
-  <div class="uk-padding-small" style="display: inline-flex; align-items: center;">
-    <img
-      src="../../../../assets/logo/Logo-Valtico.png"
-      alt=""
-      style="width: 200px;"
-    />
-    <div>
-      <h2 style="font-weight: bold; margin-left: 10px;">Creamos valor a través de la gestión de datos</h2>
-    </div>
-  </div>
-</div>
-
+<!-- Menu for Desktop -->
 <div
   class="uk-card uk-card-body uk-card-default uk-padding-remove"
   uk-scrollspy="cls: animation-slide-left"
 >
-  <nav uk-navbar="" class="uk-navbar">
-    <div class="uk-navbar-left uk-visible@m">
+  <nav uk-navbar class="uk-navbar">
+    <div class="uk-navbar-left">
+      <img
+        src="../../../../assets/logo/Logo-Valtico.png"
+        alt="Logo de Valtico Chile"
+        width="280"
+      />
+    </div>
+
+    <div class="uk-navbar-right uk-visible@m mr-4">
       <ul class="uk-navbar-nav">
         <li
           *ngFor="let navbarItem of navbarRoutes"
@@ -40,26 +35,12 @@
       </ul>
     </div>
 
-    <div
-      class="uk-navbar-left uk-hidden@m"
-      style="display: flex; align-items: center;"
-    >
-      <!-- <p style="font-size: 1.5rem; margin: 0 0 0 10px;">Logo</p> -->
-      <div class="uk-padding-small">
-        <img
-          src="../../../../assets/logo/Logo-Valtico.png"
-          alt=""
-          style="width: 100px;"
-        />
-      </div>
-    </div>
-
     <div class="uk-navbar-right uk-hidden@m">
       <a
         class="uk-navbar-toggle uk-icon uk-navbar-toggle-icon"
         href="#offcanvas"
-        uk-navbar-toggle-icon=""
-        uk-toggle=""
+        uk-navbar-toggle-icon
+        uk-toggle
       >
         <svg
           width="20"
@@ -74,56 +55,20 @@
         </svg>
       </a>
     </div>
-
-    <div class="uk-navbar-right uk-visible@m">
-      <div>
-        <a id="element" class="uk-navbar-toggle" uk-search-icon href="#"></a>
-        <div class="uk-drop" uk-drop="mode: click; pos: left-center; offset: 0">
-          <form class="uk-search uk-search-navbar uk-width-1-1">
-            <input
-              id="search-input"
-              class="uk-search-input"
-              type="text"
-              placeholder="Buscar..."
-              [(ngModel)]="findText"
-              [ngModelOptions]="{ standalone: true }"
-            />
-            <ul
-              style="
-                position: absolute;
-                background-color: white;
-                list-style: none;
-                font-size: 1.3rem;
-              "
-            >
-              <ng-container *ngFor="let item of navbarRoutes">
-                <li
-                  *ngIf="compareText(item.name)"
-                  style="padding: 5px; padding-right: 20px;"
-                  (click)="clickItem()"
-                >
-                  <a [routerLink]="item.route">{{ item.name }}</a>
-                </li>
-              </ng-container>
-            </ul>
-          </form>
-        </div>
-      </div>
-    </div>
   </nav>
 </div>
 
+<!-- Menu for Mobile -->
 <div id="offcanvas" uk-offcanvas="overlay: true">
   <div class="uk-offcanvas-bar">
     <button class="uk-offcanvas-close" type="button" uk-close></button>
 
     <div class="uk-margin-bottom">
-      <!-- <p style="font-size: 3rem;">Logo</p> -->
       <div class="uk-padding-small">
         <img
           src="../../../../assets/logo/Logo-Valtico.png"
-          alt=""
-          style="width: 100px;"
+          alt="Logo de Valtico Chile"
+          width="170"
         />
       </div>
     </div>

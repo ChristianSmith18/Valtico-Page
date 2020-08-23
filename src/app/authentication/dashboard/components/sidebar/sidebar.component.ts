@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarRoutes } from '@src/app/shared/components/navbar/navbar.component';
+import {
+  NavbarRoutes,
+  NavRoutesService,
+} from '@shared/services/nav-routes.service';
 import { SwalService } from '@shared/services/swal.service';
-import { AuthenticationService } from '@src/app/authentication/services/authentication.service';
+import { AuthenticationService } from '@app/authentication/services/authentication.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,28 +13,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
-  public pages: NavbarRoutes[] = [
-    { name: 'home', route: 'home', icon: 'fas fa-home' },
-    { name: 'productos', route: 'products', icon: 'fas fa-store' },
-    { name: 'servicios', route: 'services', icon: 'fas fa-receipt' },
-    { name: 'quiénes somos', route: 'about', icon: 'fas fa-question-circle' },
-    {
-      name: 'clientes',
-      route: 'clients',
-      icon: 'fas fa-users',
-      child: [
-        { name: 'casos de éxito', route: 'success', icon: 'fas fa-thumbs-up' },
-      ],
-    },
-    { name: 'blog', route: 'blog', icon: 'fas fa-blog' },
-    { name: 'eventos', route: 'events', icon: 'fas fa-calendar-week' },
-  ];
+  public pages: NavbarRoutes[];
 
   constructor(
+    private _navRoutes: NavRoutesService,
     private _authentication: AuthenticationService,
     private router: Router,
     private _swal: SwalService
-  ) {}
+  ) {
+    this.pages = this._navRoutes.getNavbarRoutes;
+  }
 
   ngOnInit(): void {
     document

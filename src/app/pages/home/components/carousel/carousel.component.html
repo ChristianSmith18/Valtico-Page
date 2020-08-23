@@ -4,12 +4,28 @@
   tabindex="-1"
   [attr.uk-slideshow]="getOptions"
 >
-  <ul class="uk-slideshow-items">
+  <ul *ngIf="!skeleton" class="uk-slideshow-items">
     <li *ngFor="let slide of slides">
       <a [routerLink]="slide.route">
-        <img *ngIf="!skeleton" [src]="slide.img" alt="" uk-cover />
+        <img  [src]="slide.img" alt="" uk-cover />
+        <div
+          class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom"
+        >
+          <h3 class="uk-margin-remove">
+            <span>{{ slide.title }}</span>
+          </h3>
+          <p class="uk-margin-remove">
+            <span>{{ slide.description }}</span>
+          </p>
+        </div>
+      </a>
+    </li>
+  </ul>
+
+  <ul *ngIf="skeleton" class="uk-slideshow-items">
+    <li *ngFor="let slide of [1]">
+      <a>
         <ngx-skeleton-loader
-          *ngIf="skeleton"
           animation="progress"
           [theme]="{ 'border-radius': 'unset', height: '100%' }"
         ></ngx-skeleton-loader>
@@ -17,9 +33,7 @@
           class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom"
         >
           <h3 class="uk-margin-remove">
-            <span *ngIf="!skeleton">{{ slide.title }}</span>
             <ngx-skeleton-loader
-              *ngIf="skeleton"
               animation="progress"
               [theme]="{
                 'border-radius': 'unset',
@@ -29,7 +43,6 @@
             ></ngx-skeleton-loader>
           </h3>
           <p class="uk-margin-remove">
-            <span *ngIf="!skeleton">{{ slide.description }}</span>
             <ngx-skeleton-loader
               *ngIf="skeleton"
               animation="progress"

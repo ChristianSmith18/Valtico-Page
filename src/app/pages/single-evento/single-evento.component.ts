@@ -1,7 +1,8 @@
-import { EventosService } from './../../shared/services/eventos.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EventosService } from '@shared/services/eventos.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DomSanitizerService } from '@src/app/shared/services/dom-sanitizer.service';
 
 @Component({
   selector: 'app-single-evento',
@@ -19,7 +20,8 @@ export class SingleEventoComponent implements OnInit {
   constructor(
     private _evento: EventosService,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private _domSanitizer: DomSanitizerService
   ) {
     this._evento.getOneEvento(window.location.pathname.split('/')[2]).subscribe(
       ({ ok, event }) => {
@@ -31,7 +33,7 @@ export class SingleEventoComponent implements OnInit {
         this.imgBanner = event.complete.imgTop;
 
         document.querySelector('#editor-container').innerHTML =
-          event.complete.article;
+          this._domSanitizer.applyDOMSanitizer(event.complete.article) + '';
         this.showBgData = false;
         this.spinner.hide();
       },

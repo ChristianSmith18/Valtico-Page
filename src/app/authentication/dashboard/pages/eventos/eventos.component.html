@@ -61,11 +61,11 @@
           <input
             type="file"
             class="custom-file-input"
-            id="customFile"
+            id="customFile1"
             accept="image/gif, image/jpeg, image/png"
             (change)="onUploadChange($event, true)"
           />
-          <label id="l-img-p" class="custom-file-label" for="customFile">
+          <label id="l-img-p" class="custom-file-label" for="customFile1">
             Suba la imagen de portada
           </label>
         </div>
@@ -82,11 +82,11 @@
           <input
             type="file"
             class="custom-file-input"
-            id="customFile"
+            id="customFile2"
             accept="image/gif, image/jpeg, image/png"
             (change)="onUploadChange($event, false)"
           />
-          <label id="l-img-e" class="custom-file-label" for="customFile">
+          <label id="l-img-e" class="custom-file-label" for="customFile2">
             Suba la imagen del evento
           </label>
         </div>
@@ -116,7 +116,6 @@
             [route]="null"
           ></app-element-post>
         </div>
-        <!-- <div class="ql-editor" [innerHTML]="content"></div> -->
       </div>
     </div>
   </div>

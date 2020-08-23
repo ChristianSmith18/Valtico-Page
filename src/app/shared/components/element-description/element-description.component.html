@@ -1,14 +1,12 @@
 <article class="uk-article">
-  <h1 class="uk-article-title">
-    <a class="uk-link-reset" href="">{{ title }}</a>
+  <h1 class="uk-article-title mb-4">
+    <a class="uk-link-reset">{{ title }}</a>
   </h1>
 
   <div
-    class="img-section uk-float-left uk-margin-right"
+    class="img-section uk-float-left uk-margin-right mb-4"
     [style.backgroundImage]="'url('+img+')'"
   ></div>
 
-  <p class="uk-text-lead">{{ content }}</p>
-
-  <!-- <p>{{ content }}</p> -->
+  <p class="uk-text-lead uk-text-justify">{{ content }}</p>
 </article>

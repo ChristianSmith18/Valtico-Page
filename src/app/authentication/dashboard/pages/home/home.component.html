@@ -1,177 +1,127 @@
-<h2>Redes Sociales</h2>
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">
-      <span uk-icon="icon: facebook"></span>
-    </span>
+<ng-container *ngIf="allData">
+  <h2>Redes Sociales</h2>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">
+        <span uk-icon="icon: linkedin"></span>
+      </span>
+    </div>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Ingrese la url del Linkedin de Valtico Chile"
+      aria-label="Linkedin"
+      aria-describedby="basic-addon1"
+      [(ngModel)]="allData[0].url"
+    />
+    <div class="input-group-append">
+      <button class="btn bg-cyan" type="button" (click)="updateSocialBar(0)">
+        Actualizar
+      </button>
+    </div>
   </div>
-  <input
-    type="text"
-    class="form-control"
-    placeholder="Ingrese la url del Facebook de Valtico Chile"
-    aria-label="Facebook"
-    aria-describedby="basic-addon1"
-    [(ngModel)]="facebook"
-  />
-  <div class="input-group-append">
-    <button class="btn bg-cyan" type="button">Actualizar</button>
+  <div class="input-group mb-4">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">
+        <span uk-icon="icon: whatsapp"></span>
+      </span>
+    </div>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Ingrese el número del Whatsapp de Valtico Chile (Ej: 56912345678)"
+      aria-label="Whatsapp"
+      aria-describedby="basic-addon1"
+      [(ngModel)]="allData[1].url"
+    />
+    <div class="input-group-append">
+      <button class="btn bg-cyan" type="button" (click)="updateSocialBar(1)">
+        Actualizar
+      </button>
+    </div>
   </div>
-</div>
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">
-      <span uk-icon="icon: twitter"></span>
-    </span>
-  </div>
-  <input
-    type="text"
-    class="form-control"
-    placeholder="Ingrese la url del Twitter de Valtico Chile"
-    aria-label="Twitter"
-    aria-describedby="basic-addon1"
-    [(ngModel)]="twitter"
-  />
-  <div class="input-group-append">
-    <button class="btn bg-cyan" type="button">Actualizar</button>
-  </div>
-</div>
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">
-      <span uk-icon="icon: linkedin"></span>
-    </span>
-  </div>
-  <input
-    type="text"
-    class="form-control"
-    placeholder="Ingrese la url del Linkedin de Valtico Chile"
-    aria-label="Linkedin"
-    aria-describedby="basic-addon1"
-    [(ngModel)]="linkedin"
-  />
-  <div class="input-group-append">
-    <button class="btn bg-cyan" type="button">Actualizar</button>
-  </div>
-</div>
-<div class="input-group mb-4">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">
-      <span uk-icon="icon: youtube"></span>
-    </span>
-  </div>
-  <input
-    type="text"
-    class="form-control"
-    placeholder="Ingrese la url del Youtube de Valtico Chile"
-    aria-label="Youtube"
-    aria-describedby="basic-addon1"
-    [(ngModel)]="youtube"
-  />
-  <div class="input-group-append">
-    <button class="btn bg-cyan" type="button">Actualizar</button>
-  </div>
-</div>
+</ng-container>
 
-<h2>Footer</h2>
-<div
-  *ngIf="boxContent"
-  class="uk-child-width-1-1@s uk-child-width-1-2@s uk-text-center mb-4"
-  uk-grid
->
-  <div>
-    <div class="uk-card uk-card-default uk-card-body">
-      <h3 [attr.contenteditable]="currentIndex === 0">
-        {{ boxContent[0].title }}
-      </h3>
-      <p [attr.contenteditable]="currentIndex === 0">
-        {{ boxContent[0].description }}
-      </p>
-      <button
-        *ngIf="!(currentIndex === 0)"
-        class="btn btn-primary"
-        (click)="setCurrentIndex(0)"
-      >
-        Editar
-      </button>
-      <button
-        *ngIf="currentIndex === 0"
-        class="btn bg-cyan"
-        (click)="updateData(0)"
-      >
-        Guardar
-      </button>
+<ng-container *ngIf="boxContent">
+  <h2>Footer</h2>
+  <div
+    class="uk-child-width-1-1@s uk-child-width-1-2@s uk-text-center mb-4"
+    uk-grid
+  >
+    <div>
+      <div class="uk-card uk-card-default uk-card-body">
+        <h3 [attr.contenteditable]="currentIndex === 0">
+          {{ boxContent[0].title }}
+        </h3>
+        <div
+          [attr.contenteditable]="currentIndex === 0"
+          [innerHTML]="applyDOMSanitizer(boxContent[0].description)"
+        ></div>
+        <button
+          *ngIf="!(currentIndex === 0)"
+          class="btn btn-primary"
+          (click)="setCurrentIndex(0)"
+        >
+          Editar
+        </button>
+        <button
+          *ngIf="currentIndex === 0"
+          class="btn bg-cyan"
+          (click)="updateData(0)"
+        >
+          Guardar
+        </button>
+      </div>
+    </div>
+    <div>
+      <div class="uk-card uk-card-default uk-card-body">
+        <h3 [attr.contenteditable]="currentIndex === 1">
+          {{ boxContent[1].title }}
+        </h3>
+        <div
+          [attr.contenteditable]="currentIndex === 1"
+          [innerHTML]="applyDOMSanitizer(boxContent[1].description)"
+        ></div>
+        <button
+          *ngIf="!(currentIndex === 1)"
+          class="btn btn-primary"
+          (click)="setCurrentIndex(1)"
+        >
+          Editar
+        </button>
+        <button
+          *ngIf="currentIndex === 1"
+          class="btn bg-cyan"
+          (click)="updateData(1)"
+        >
+          Guardar
+        </button>
+      </div>
+    </div>
+    <div>
+      <div class="uk-card uk-card-default uk-card-body">
+        <h3 [attr.contenteditable]="currentIndex === 2">
+          {{ boxContent[2].title }}
+        </h3>
+        <div
+          [attr.contenteditable]="currentIndex === 2"
+          [innerHTML]="applyDOMSanitizer(boxContent[2].description)"
+        ></div>
+        <button
+          *ngIf="!(currentIndex === 2)"
+          class="btn btn-primary"
+          (click)="setCurrentIndex(2)"
+        >
+          Editar
+        </button>
+        <button
+          *ngIf="currentIndex === 2"
+          class="btn bg-cyan"
+          (click)="updateData(2)"
+        >
+          Guardar
+        </button>
+      </div>
     </div>
   </div>
-  <div>
-    <div class="uk-card uk-card-default uk-card-body">
-      <h3 [attr.contenteditable]="currentIndex === 1">
-        {{ boxContent[1].title }}
-      </h3>
-      <p [attr.contenteditable]="currentIndex === 1">
-        {{ boxContent[1].description }}
-      </p>
-      <button
-        *ngIf="!(currentIndex === 1)"
-        class="btn btn-primary"
-        (click)="setCurrentIndex(1)"
-      >
-        Editar
-      </button>
-      <button
-        *ngIf="currentIndex === 1"
-        class="btn bg-cyan"
-        (click)="updateData(1)"
-      >
-        Guardar
-      </button>
-    </div>
-  </div>
-  <div>
-    <div class="uk-card uk-card-default uk-card-body">
-      <h3 [attr.contenteditable]="currentIndex === 2">
-        {{ boxContent[2].title }}
-      </h3>
-      <p [attr.contenteditable]="currentIndex === 2">
-        {{ boxContent[2].description }}
-      </p>
-      <button
-        *ngIf="!(currentIndex === 2)"
-        class="btn btn-primary"
-        (click)="setCurrentIndex(2)"
-      >
-        Editar
-      </button>
-      <button
-        *ngIf="currentIndex === 2"
-        class="btn bg-cyan"
-        (click)="updateData(2)"
-      >
-        Guardar
-      </button>
-    </div>
-  </div>
-  <div>
-    <div class="uk-card uk-card-default uk-card-body">
-      <h3 [attr.contenteditable]="currentIndex === 3">
-        {{ boxContent[3].title }}
-      </h3>
-      <p [attr.contenteditable]="currentIndex === 3">
-        {{ boxContent[3].description }}
-      </p>
-      <button
-        *ngIf="!(currentIndex === 3)"
-        class="btn btn-primary"
-        (click)="setCurrentIndex(3)"
-      >
-        Editar
-      </button>
-      <button
-        *ngIf="currentIndex === 3"
-        class="btn bg-cyan"
-        (click)="updateData(3)"
-      >
-        Guardar
-      </button>
-    </div>
-  </div>
-</div>
+</ng-container>

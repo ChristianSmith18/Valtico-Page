@@ -17,9 +17,10 @@
         <h3 class="mb-4" [attr.contenteditable]="editMode">
           {{ contenido.seccionQuienesSomos.title }}
         </h3>
-        <p [attr.contenteditable]="editMode">
-          {{ contenido.seccionQuienesSomos.content }}
-        </p>
+        <div
+          [attr.contenteditable]="editMode"
+          [innerHTML]="applyDOMSanitizer(contenido.seccionQuienesSomos.content)"
+        ></div>
       </div>
     </div>
     <div class="uk-width-1-2@m uk-width-1-3@l">
@@ -27,9 +28,12 @@
         <h3 [attr.contenteditable]="editMode">
           {{ contenido.seccionNuestraHistoria.title }}
         </h3>
-        <p [attr.contenteditable]="editMode">
-          {{ contenido.seccionNuestraHistoria.content }}
-        </p>
+        <div
+          [attr.contenteditable]="editMode"
+          [innerHTML]="
+            applyDOMSanitizer(contenido.seccionNuestraHistoria.content)
+          "
+        ></div>
       </div>
     </div>
     <div class="uk-width-1-2@m uk-width-1-3@l">
@@ -37,9 +41,10 @@
         <h3 [attr.contenteditable]="editMode">
           {{ contenido.seccionMisionVision.title }}
         </h3>
-        <p [attr.contenteditable]="editMode">
-          {{ contenido.seccionMisionVision.content }}
-        </p>
+        <div
+          [attr.contenteditable]="editMode"
+          [innerHTML]="applyDOMSanitizer(contenido.seccionMisionVision.content)"
+        ></div>
       </div>
     </div>
     <div class="uk-width-1-2@m uk-width-1-3@l">
@@ -47,9 +52,10 @@
         <h3 [attr.contenteditable]="editMode">
           {{ contenido.seccionAlianzas.title }}
         </h3>
-        <p [attr.contenteditable]="editMode">
-          {{ contenido.seccionAlianzas.content }}
-        </p>
+        <div
+          [attr.contenteditable]="editMode"
+          [innerHTML]="applyDOMSanitizer(contenido.seccionAlianzas.content)"
+        ></div>
       </div>
     </div>
   </div>

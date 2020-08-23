@@ -1,10 +1,8 @@
-import { Servicio } from './../../shared/models/servicio.interface';
-import { Producto } from '@src/app/shared/models/producto.interface';
-import { ServiciosService } from './../../shared/services/servicios.service';
-import { ProductosService } from '@src/app/shared/services/productos.service';
-import { Component, OnInit } from '@angular/core';
-import UIkit from 'uikit';
-import { CarouselService, SlideItem } from './services/carousel.service';
+import { Component } from '@angular/core';
+import { SlideItem } from './carousel-item.interface';
+import { Servicio } from '@shared/models/servicio.interface';
+import { ServiciosService } from '@shared/services/servicios.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -12,91 +10,68 @@ import { CarouselService, SlideItem } from './services/carousel.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
+  constructor(
+    private _projects: ServiciosService,
+    private spinner: NgxSpinnerService
+  ) {
+    this.spinner.show();
+
+    const oneItem = localStorage.getItem('pmrOyrz');
+    if (oneItem) {
+      this.slides.push(JSON.parse(atob(oneItem)));
+      this.loader = true;
+      this.spinner.hide();
+    }
+
+    this._projects.getTwoServicios().subscribe(({ servicios }) => {
+      this.createItemSlide(servicios);
+      this.slides = this.createItemSlide(servicios);
+      this.loader = true;
+      this.spinner.hide();
+
+      localStorage.setItem('pmrOyrz', btoa(JSON.stringify(this.slides[0])));
+    });
+  }
+  private slideHeight = 490;
+
   public loader = false;
-  public indexSlideActive = 0;
-  public slideHeight = 320;
-  public slides: SlideItem[];
-  public slidesProductos: Producto[];
-  public slidesServicios: Servicio[];
+  public slides: SlideItem[] = [];
   public options = {
     animation: 'slide',
     'min-height': this.slideHeight - 1,
     'max-height': this.slideHeight,
     autoplay: true,
-    'autoplay-interval': 8000,
+    'autoplay-interval': 4000,
     easing: 'ease-in-out',
     draggable: false,
   };
 
-  constructor(
-    private _carousel: CarouselService,
-    private _productos: ProductosService,
-    private _servicios: ServiciosService
-  ) {
-    this.slides = this._carousel.getSlides;
-    this._productos.getTwoProductos().subscribe(({ productos }) => {
-      this.slidesProductos = productos;
-      this.slides = this.transformOneSlide();
-    });
-    this._servicios.getTwoServicios().subscribe(({ servicios }) => {
-      this.slidesServicios = servicios;
-      this.transformOneSlide();
-      this.slides = this.transformOneSlide();
-    });
-  }
+  public template = `
+  <div>
+    <img src="../../../assets/logo/Logo-Valtico.png" />
+    <img src="../../../assets/img/home/loading.svg" />
+  </div>
+  `;
 
-  ngOnInit(): void {
-    const element = document.getElementById('slideshow');
-    element.addEventListener('itemshown', () => {
-      let count = 0;
-      element.querySelectorAll('ul>li').forEach((item) => {
-        if (item.classList.contains('uk-active')) {
-          this.indexSlideActive = count;
-        }
-        count++;
-      });
-    });
-  }
-
-  setIndex(index: number): void {
-    const element = document.getElementById('slideshow');
-    UIkit.slideshow(element).show(index);
-  }
-
-  setHeight(total: number): string {
-    return `${100 / total}%`;
-  }
-
-  transformOneSlide(): SlideItem[] {
+  private createItemSlide(servicios: Servicio[]): SlideItem[] {
     const slidesItem: SlideItem[] = [];
-    if (this.slidesProductos !== null) {
-      this.slidesProductos.forEach((producto) => {
-        const newslideItem: SlideItem = {
-          title: producto.title,
-          description: producto.shortDescription,
-          img: producto.imgPrimary,
-          route: `/products`,
-        };
 
-        slidesItem.push(newslideItem);
-      });
-    }
-
-    if (this.slidesServicios !== null) {
-      this.slidesServicios.forEach((servicio) => {
+    if (servicios !== null) {
+      servicios.forEach((servicio) => {
         const newslideItem: SlideItem = {
           title: servicio.title,
-          description: servicio.largeDescription.substring(0, 100) + '...',
+          description:
+            servicio.largeDescription.length >= 100
+              ? servicio.largeDescription.substring(0, 100) + '...'
+              : servicio.largeDescription,
           img: servicio.imgPrimary,
-          route: `/services`,
+          route: `/projects`,
         };
 
         slidesItem.push(newslideItem);
       });
     }
-    console.clear();
-    this.loader = true;
     return slidesItem;
   }
 }

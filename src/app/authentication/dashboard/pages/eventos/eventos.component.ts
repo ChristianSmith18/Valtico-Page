@@ -5,6 +5,7 @@ import { Evento } from '@shared/models/evento.interface';
 import { SwalService } from '@shared/services/swal.service';
 import UIkit from 'uikit';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DomSanitizerService } from '@shared/services/dom-sanitizer.service';
 
 import Compressor from 'compressorjs';
 
@@ -29,7 +30,8 @@ export class EventosComponent implements OnInit, OnDestroy {
   constructor(
     private _evento: EventosService,
     private spinner: NgxSpinnerService,
-    private _swal: SwalService
+    private _swal: SwalService,
+    private _domSanitizer: DomSanitizerService
   ) {}
 
   ngOnInit(): void {
@@ -73,6 +75,10 @@ export class EventosComponent implements OnInit, OnDestroy {
     this.eventoSubscription.unsubscribe();
   }
 
+  private applyDOMSanitizer(html: string) {
+    return this._domSanitizer.applyDOMSanitizer(html);
+  }
+
   onUploadChange(evt: any, portada: boolean) {
     const file = evt.target.files[0] || null;
     const filename = file.name;
@@ -102,7 +108,7 @@ export class EventosComponent implements OnInit, OnDestroy {
               ) as HTMLLabelElement).innerText = this.textFormat(filename);
 
               (document.querySelector(
-                '#exampleFormControlDescription1'
+                '#customFile2'
               ) as HTMLInputElement).select();
             } else {
               this.base64textStringContenido = base64data;
@@ -127,7 +133,7 @@ export class EventosComponent implements OnInit, OnDestroy {
   }
 
   inner(event: HTMLDivElement) {
-    this.content = event.innerHTML;
+    this.content = this.applyDOMSanitizer(event.innerHTML);
   }
 
   createEvento() {
@@ -151,7 +157,13 @@ export class EventosComponent implements OnInit, OnDestroy {
           .updateEvento(this.eventos[this.index].id, evento)
           .subscribe(
             (e) => {
+              const id = this.eventos[this.index].id;
+              const dateAt = this.eventos[this.index].dateAt;
+
               this.eventos[this.index] = evento;
+              this.eventos[this.index].id = id;
+              this.eventos[this.index].dateAt = dateAt;
+
               this.index = null;
               UIkit.modal(document.querySelector('#modal-full')).hide();
               this.spinner.hide();

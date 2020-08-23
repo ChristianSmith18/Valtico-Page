@@ -1,6 +1,11 @@
-@import '../../../../assets/scss/variables.scss';
+@import "../../../../assets/scss/variables.scss";
+
+#logo-valtico {
+  width: 350px;
+}
 
 nav {
+  min-height: 80px; // Cambio
   &.for-desktop {
     display: unset;
 
@@ -22,7 +27,7 @@ nav {
     min-height: 60px;
     align-items: center;
 
-    li>a {
+    li > a {
       min-height: unset;
     }
   }
@@ -33,7 +38,6 @@ nav {
 }
 
 .uk-offcanvas-bar {
-
   ul {
     padding-left: 8px;
   }
@@ -61,7 +65,6 @@ nav {
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
   }
-
 }
 
 .nav-item {
@@ -78,7 +81,7 @@ nav {
 }
 
 .active {
-  background-color: rgba(255, 255, 255, .9) !important;
+  background-color: rgba(255, 255, 255, 0.9) !important;
 
   i,
   p {

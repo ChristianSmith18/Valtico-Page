@@ -12,8 +12,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 // Components
 import { HomeComponent } from './home/home.component';
-import { ServiciosComponent } from './servicios/servicios.component';
-import { ProductosComponent } from './productos/productos.component';
+import { ServiciosComponent } from './proyectos/servicios.component';
+import { ProductosComponent } from './que-hacemos/productos.component';
 import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { CasosDeExitoComponent } from './casos-de-exito/casos-de-exito.component';

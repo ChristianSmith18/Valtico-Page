@@ -1,6 +1,6 @@
-import { Servicio } from './../../../../shared/models/servicio.interface';
-import { ServiciosService } from '@shared/services/servicios.service';
 import { Component, OnInit } from '@angular/core';
+import { Servicio } from '@shared/models/servicio.interface';
+import { ServiciosService } from '@shared/services/servicios.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import UIkit from 'uikit';
 
@@ -38,7 +38,6 @@ export class ServiciosComponent implements OnInit {
     document.querySelector('#close-button').addEventListener('click', () => {
       if (this.editMode) {
         setTimeout(() => {
-          this.editMode = false;
           this.clearFields();
         }, 500);
       }
@@ -74,10 +73,6 @@ export class ServiciosComponent implements OnInit {
         this.base64textStringSecondary = this.servicios[index].imgSecondary;
         this.largeDescription = this.servicios[index].largeDescription;
 
-        // document.querySelector('#editor > .ql-editor').innerHTML = this.blogs[
-        //   index
-        // ].complete.article;
-
         UIkit.modal(document.querySelector('#modal-full')).show();
         break;
     }
@@ -85,6 +80,7 @@ export class ServiciosComponent implements OnInit {
 
   onUploadChange(evt: any, primary: boolean) {
     const file = evt.target.files[0] || null;
+    const filename = file?.name;
 
     if (file) {
       if (
@@ -106,10 +102,27 @@ export class ServiciosComponent implements OnInit {
             if (primary) {
               this.base64textStringPrimary = base64data;
               (document.querySelector(
-                '#exampleFormControlDescription1'
+                '#customFile2'
               ) as HTMLInputElement).select();
+
+              document.querySelectorAll(
+                'label.custom-file-label'
+              )[0].innerHTML =
+                (filename as string).length < 30
+                  ? (filename as string)
+                  : (filename as string).substring(0, 30) + '...';
             } else {
               this.base64textStringSecondary = base64data;
+
+              (document.querySelector(
+                '#exampleFormControlTextarea1'
+              ) as HTMLInputElement).select();
+              document.querySelectorAll(
+                'label.custom-file-label'
+              )[1].innerHTML =
+                (filename as string).length < 30
+                  ? (filename as string)
+                  : (filename as string).substring(0, 30) + '...';
             }
           };
         },
@@ -124,6 +137,7 @@ export class ServiciosComponent implements OnInit {
   }
 
   createProducto() {
+    this.spinner.show();
     const tempProducto: Servicio = {
       title: this.titleProduct,
       imgPrimary: this.base64textStringPrimary,
@@ -136,16 +150,22 @@ export class ServiciosComponent implements OnInit {
       tempProducto.enabled = this.servicios[this.currentIndex].enabled;
       this._servicios
         .updateServicio(this.servicios[this.currentIndex].id, tempProducto)
-        .subscribe(() => {
-          this.editMode = false;
-          UIkit.modal(document.querySelector('#modal-full')).hide();
+        .subscribe(({ ok }) => {
+          if (ok) {
+            const id = this.servicios[this.currentIndex].id;
+            this.servicios[this.currentIndex] = tempProducto;
+            this.clearFields();
+          }
         });
     } else {
-      this._servicios.createServicio(tempProducto).subscribe(({ servicio }) => {
-        this.servicios.unshift(servicio);
-        this.editMode = false;
-        UIkit.modal(document.querySelector('#modal-full')).hide();
-      });
+      this._servicios
+        .createServicio(tempProducto)
+        .subscribe(({ servicio, ok }) => {
+          if (ok) {
+            this.servicios.unshift(servicio);
+            this.clearFields();
+          }
+        });
     }
   }
 
@@ -154,5 +174,9 @@ export class ServiciosComponent implements OnInit {
     this.base64textStringPrimary = null;
     this.base64textStringSecondary = null;
     this.largeDescription = null;
+    this.editMode = false;
+
+    UIkit.modal(document.querySelector('#modal-full')).hide();
+    this.spinner.hide();
   }
 }

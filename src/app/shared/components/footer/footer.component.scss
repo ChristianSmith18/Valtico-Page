@@ -1,13 +1,17 @@
 footer.uk-section {
   background-color: #121212;
+  padding: 0;
+  padding-top: 20px;
   padding-bottom: 70px;
 
   h3 {
     color: #fff;
+    font-size: 1.5rem;
   }
 
-  p {
-    color: rgba(#fff, .5);
+  div {
+    color: #acacac;
+    font-size: 1.1rem;
   }
 }
 
@@ -15,27 +19,29 @@ footer.uk-section {
 span.author,
 span.framework,
 span.powered {
-  font-family: 'Lobster Two', cursive;
+  font-family: "Lobster Two", cursive;
 }
 
 .dev-section {
-  font-size: 1.1rem;
+  font-size: 0.95rem !important;
   margin-bottom: -30px;
-  color: rgba(#fff, .6);
+  color: rgba(#fff, 0.6);
+  height: 0;
+  margin-top: 20px;
 
   span.author,
   span.framework {
     cursor: pointer;
-    transition: all ease-in-out .3s;
+    transition: all ease-in-out 0.3s;
   }
 
   span.author:hover {
-    color: #56959E;
+    color: #56959e;
     font-size: 1.2rem;
   }
 
   span.framework:hover {
-    color: #DD1B16;
+    color: #dd1b16;
   }
 }
 
