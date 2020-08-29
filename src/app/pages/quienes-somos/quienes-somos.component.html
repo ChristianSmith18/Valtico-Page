@@ -4,6 +4,7 @@
       <div class="uk-card uk-card-default uk-card-body">
         <h3>{{ contenido.seccionQuienesSomos.title }}</h3>
         <div
+          class="text-justify"
           [innerHTML]="applyDOMSanitizer(contenido.seccionQuienesSomos.content)"
         ></div>
       </div>
@@ -12,6 +13,7 @@
       <div class="uk-card uk-card-default uk-card-body">
         <h3>{{ contenido.seccionNuestraHistoria.title }}</h3>
         <div
+          class="text-justify"
           [innerHTML]="
             applyDOMSanitizer(contenido.seccionNuestraHistoria.content)
           "
@@ -22,6 +24,7 @@
       <div class="uk-card uk-card-default uk-card-body">
         <h3>{{ contenido.seccionMisionVision.title }}</h3>
         <div
+          class="text-justify"
           [innerHTML]="applyDOMSanitizer(contenido.seccionMisionVision.content)"
         ></div>
       </div>
@@ -30,6 +33,7 @@
       <div class="uk-card uk-card-default uk-card-body">
         <h3>{{ contenido.seccionAlianzas.title }}</h3>
         <div
+          class="text-justify"
           [innerHTML]="applyDOMSanitizer(contenido.seccionAlianzas.content)"
         ></div>
       </div>

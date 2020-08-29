@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Servicio } from '@shared/models/servicio.interface';
 import { ServiciosService } from '@shared/services/servicios.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SwalService } from '@shared/services/swal.service';
 import UIkit from 'uikit';
 
 import Compressor from 'compressorjs';
@@ -23,7 +24,8 @@ export class ServiciosComponent implements OnInit {
 
   constructor(
     private _servicios: ServiciosService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private _swal: SwalService
   ) {
     this.spinner.show();
     this._servicios.getAllServicios().subscribe(({ servicios }) => {
@@ -35,12 +37,12 @@ export class ServiciosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.clearFields();
+
     document.querySelector('#close-button').addEventListener('click', () => {
-      if (this.editMode) {
-        setTimeout(() => {
-          this.clearFields();
-        }, 500);
-      }
+      setTimeout(() => {
+        this.clearFields();
+      }, 500);
     });
   }
 
@@ -73,7 +75,7 @@ export class ServiciosComponent implements OnInit {
         this.base64textStringSecondary = this.servicios[index].imgSecondary;
         this.largeDescription = this.servicios[index].largeDescription;
 
-        UIkit.modal(document.querySelector('#modal-full')).show();
+        UIkit.modal(document.querySelector('#modal-full-servicios')).show();
         break;
     }
   }
@@ -133,7 +135,7 @@ export class ServiciosComponent implements OnInit {
   }
 
   openModal() {
-    UIkit.modal(document.querySelector('#modal-full')).show();
+    UIkit.modal(document.querySelector('#modal-full-servicios')).show();
   }
 
   createProducto() {
@@ -150,22 +152,67 @@ export class ServiciosComponent implements OnInit {
       tempProducto.enabled = this.servicios[this.currentIndex].enabled;
       this._servicios
         .updateServicio(this.servicios[this.currentIndex].id, tempProducto)
-        .subscribe(({ ok }) => {
-          if (ok) {
-            const id = this.servicios[this.currentIndex].id;
-            this.servicios[this.currentIndex] = tempProducto;
-            this.clearFields();
+        .subscribe(
+          ({ ok }) => {
+            if (ok) {
+              const id = this.servicios[this.currentIndex].id;
+              const dateAt = this.servicios[this.currentIndex].dateAt;
+
+              this.servicios[this.currentIndex] = tempProducto;
+              this.servicios[this.currentIndex].id = id;
+              this.servicios[this.currentIndex].dateAt = dateAt;
+
+              this.clearFields();
+            }
+
+            setTimeout(() => {
+              this.spinner.hide();
+            }, 5000);
+          },
+          (err) => {
+            this.spinner.hide();
+            if (err.status === 400) {
+              console.log(err);
+              this._swal.mixinSwal(
+                `Debe rellenar todos los campos correctamente!`,
+                'info'
+              );
+            } else {
+              this._swal.mixinSwal(
+                `Ha ocurrido un error desconocido! [${err.statusCode}]`,
+                'error'
+              );
+            }
           }
-        });
+        );
     } else {
-      this._servicios
-        .createServicio(tempProducto)
-        .subscribe(({ servicio, ok }) => {
+      this._servicios.createServicio(tempProducto).subscribe(
+        ({ servicio, ok }) => {
           if (ok) {
             this.servicios.unshift(servicio);
             this.clearFields();
           }
-        });
+
+          setTimeout(() => {
+            this.spinner.hide();
+          }, 5000);
+        },
+        (err) => {
+          this.spinner.hide();
+          if (err.status === 400) {
+            console.log(err);
+            this._swal.mixinSwal(
+              `Debe rellenar todos los campos correctamente!`,
+              'info'
+            );
+          } else {
+            this._swal.mixinSwal(
+              `Ha ocurrido un error desconocido! [${err.statusCode}]`,
+              'error'
+            );
+          }
+        }
+      );
     }
   }
 
@@ -176,7 +223,12 @@ export class ServiciosComponent implements OnInit {
     this.largeDescription = null;
     this.editMode = false;
 
-    UIkit.modal(document.querySelector('#modal-full')).hide();
+    document.querySelectorAll('label.custom-file-label')[0].innerHTML =
+      'Suba la imagen primaria';
+    document.querySelectorAll('label.custom-file-label')[1].innerHTML =
+      'Suba la imagen secundaria';
+
+    UIkit.modal(document.querySelector('#modal-full-servicios')).hide();
     this.spinner.hide();
   }
 }

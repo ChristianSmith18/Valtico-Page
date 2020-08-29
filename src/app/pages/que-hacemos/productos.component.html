@@ -4,6 +4,7 @@
       <div class="uk-card uk-card-default uk-card-body">
         <h3>{{ contenido.seccionQueHacemos.title }}</h3>
         <div
+          class="text-justify"
           [innerHTML]="applyDOMSanitizer(contenido.seccionQueHacemos.content)"
         ></div>
       </div>
@@ -12,6 +13,7 @@
       <div class="uk-card uk-card-default uk-card-body">
         <h3>{{ contenido.seccionNuestraMetodologiaDeTrabajo.title }}</h3>
         <div
+          class="text-justify"
           [innerHTML]="
             applyDOMSanitizer(
               contenido.seccionNuestraMetodologiaDeTrabajo.content

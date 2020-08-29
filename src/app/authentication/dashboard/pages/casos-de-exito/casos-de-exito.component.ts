@@ -1,3 +1,4 @@
+import { SwalService } from './../../../../shared/services/swal.service';
 import { Component, OnInit } from '@angular/core';
 import { CasosDeExitoService } from '@shared/services/casos-de-exito.service';
 import { CasoDeExito } from '@shared/models/caso-de-exito.interface';
@@ -23,7 +24,8 @@ export class CasosDeExitoComponent implements OnInit {
 
   constructor(
     private _casosDeExito: CasosDeExitoService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private _swal: SwalService
   ) {
     this.spinner.show();
     this._casosDeExito.getAllCasosDeExito().subscribe(({ casosDeExito }) => {
@@ -35,12 +37,12 @@ export class CasosDeExitoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.clearFields();
+
     document.querySelector('#close-button').addEventListener('click', () => {
-      if (this.editMode) {
-        setTimeout(() => {
-          this.clearFields();
-        }, 500);
-      }
+      setTimeout(() => {
+        this.clearFields();
+      }, 500);
     });
   }
 
@@ -73,7 +75,7 @@ export class CasosDeExitoComponent implements OnInit {
         this.base64textStringSecondary = this.casosDeExito[index].imgSecondary;
         this.largeDescription = this.casosDeExito[index].largeDescription;
 
-        UIkit.modal(document.querySelector('#modal-full')).show();
+        UIkit.modal(document.querySelector('#modal-full-success')).show();
         break;
     }
   }
@@ -133,7 +135,7 @@ export class CasosDeExitoComponent implements OnInit {
   }
 
   openModal() {
-    UIkit.modal(document.querySelector('#modal-full')).show();
+    UIkit.modal(document.querySelector('#modal-full-success')).show();
   }
 
   createProducto() {
@@ -153,22 +155,62 @@ export class CasosDeExitoComponent implements OnInit {
           this.casosDeExito[this.currentIndex].id,
           tempProducto
         )
-        .subscribe(({ ok }) => {
-          if (ok) {
-            const id = this.casosDeExito[this.currentIndex].id;
-            this.casosDeExito[this.currentIndex] = tempProducto;
-            this.clearFields();
+        .subscribe(
+          ({ ok }) => {
+            if (ok) {
+              const id = this.casosDeExito[this.currentIndex].id;
+              this.casosDeExito[this.currentIndex] = tempProducto;
+              this.clearFields();
+            }
+
+            setTimeout(() => {
+              this.spinner.hide();
+            }, 5000);
+          },
+          (err) => {
+            this.spinner.hide();
+            if (err.status === 400) {
+              console.log(err);
+              this._swal.mixinSwal(
+                `Debe rellenar todos los campos correctamente!`,
+                'info'
+              );
+            } else {
+              this._swal.mixinSwal(
+                `Ha ocurrido un error desconocido! [${err.statusCode}]`,
+                'error'
+              );
+            }
           }
-        });
+        );
     } else {
-      this._casosDeExito
-        .createCasoDeExito(tempProducto)
-        .subscribe(({ casoDeExito, ok }) => {
+      this._casosDeExito.createCasoDeExito(tempProducto).subscribe(
+        ({ casoDeExito, ok }) => {
           if (ok) {
             this.casosDeExito.unshift(casoDeExito);
             this.clearFields();
           }
-        });
+
+          setTimeout(() => {
+            this.spinner.hide();
+          }, 5000);
+        },
+        (err) => {
+          this.spinner.hide();
+          if (err.status === 400) {
+            console.log(err);
+            this._swal.mixinSwal(
+              `Debe rellenar todos los campos correctamente!`,
+              'info'
+            );
+          } else {
+            this._swal.mixinSwal(
+              `Ha ocurrido un error desconocido! [${err.statusCode}]`,
+              'error'
+            );
+          }
+        }
+      );
     }
   }
 
@@ -179,7 +221,12 @@ export class CasosDeExitoComponent implements OnInit {
     this.largeDescription = null;
     this.editMode = false;
 
-    UIkit.modal(document.querySelector('#modal-full')).hide();
+    document.querySelectorAll('label.custom-file-label')[0].innerHTML =
+      'Suba la imagen primaria';
+    document.querySelectorAll('label.custom-file-label')[1].innerHTML =
+      'Suba la imagen secundaria';
+
+    UIkit.modal(document.querySelector('#modal-full-success')).hide();
     this.spinner.hide();
   }
 }

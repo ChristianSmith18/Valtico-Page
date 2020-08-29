@@ -12,8 +12,22 @@
   </div>
 </div>
 
-<ngx-spinner
-  bdColor="rgb(255,255,255)"
-  [fullScreen]="true"
-  [template]="template"
-></ngx-spinner>
+<ngx-spinner bdColor="rgb(255,255,255)" [fullScreen]="true">
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    "
+  >
+    <img
+      src="../../../assets/logo/Logo-Valtico.png"
+      style="max-width: 250px; margin-bottom: -20px;"
+    />
+    <img
+      src="../../../assets/img/home/loading.svg"
+      style="margin-top: -48px;"
+    />
+  </div>
+</ngx-spinner>

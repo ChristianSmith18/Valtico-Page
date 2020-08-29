@@ -12,7 +12,7 @@ body {
   background: linear-gradient(to bottom, #f8f8f8, #fff);
 }
 
-#modal-full {
+.uk-modal {
   z-index: 9999 !important;
 }
 
@@ -106,25 +106,6 @@ span.banner-text {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-// Para el ngx spinner del home
-.ng-tns-c16-0 .ng-star-inserted {
-  div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    img:first-child {
-      max-width: 250px !important;
-      margin-bottom: -20px !important;
-    }
-
-    img:last-child {
-      margin-top: -48px !important;
-    }
-  }
 }
 
 /*
